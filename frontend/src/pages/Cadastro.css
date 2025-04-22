@@ -1,0 +1,32 @@
+.cadastro-container{
+    background-color: #0B63B6;
+    height: calc(100vh - 60px);
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.text-title{
+    color: white;
+    font-size: 80px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+}
+
+.btn-cadastrar{
+    background-color: white;
+    color: #000000;
+    font-size: 20px;
+    padding: 15px 30px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-cadastrar:hover{
+    background-color: #084986;
+    color: white; 
+    transform: scale(1.05);
+}

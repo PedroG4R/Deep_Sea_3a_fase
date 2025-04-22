@@ -1,0 +1,9 @@
+.homepage-container{
+    background-color: #0B63B6;
+    height: calc(100vh - 60px);
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
