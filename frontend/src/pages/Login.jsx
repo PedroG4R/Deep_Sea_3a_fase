@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 import Navbar from './components/Navbar'
 import './Login.css'
+import { GlobalContext } from '../contexts/GlobalContext'
 
 function Login() {
   const [nome, setNome] = useState('')
   const [senha, setSenha] = useState('')
 
   const handleLogin = () => {
-    const usuarios = JSON.parse(localStorage.getItem('usuarios')) || []
+    const { usuarios } = useContext(GlobalContext)
 
     const usuarioEncontrado = usuarios.find(user =>
       user.nome === nome && user.senha === senha

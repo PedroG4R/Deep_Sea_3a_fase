@@ -1,18 +1,17 @@
-import { createContext, useState } from "react";
+import { createContext, useState } from 'react'
 
 export const GlobalContext = createContext()
 
-export const GlobalContextProvider = ({children}) => {
-const [usuarioLogado, setUsuarioLogado] = useState(null)
-let idadeUsuario = '55'
+export const GlobalContextProvider = ({ children }) => {
+  const [usuarios, setUsuarios] = useState([])
 
-    return(
-        <GlobalContext.Provider value={{
-            usuarioLogado,
-            setUsuarioLogado,
-            idadeUsuario
-            }}>
-            {children}
-        </GlobalContext.Provider>
-    )
+  const adicionarUsuario = (novoUsuario) => {
+    setUsuarios((prev) => [...prev, novoUsuario])
+  }
+
+  return (
+    <GlobalContext.Provider value={{ usuarios, adicionarUsuario }}>
+      {children}
+    </GlobalContext.Provider>
+  )
 }
