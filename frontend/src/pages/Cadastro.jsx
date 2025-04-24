@@ -1,9 +1,11 @@
 import React, { useState, useContext } from 'react'
 import { GlobalContext } from '../contexts/GlobalContext' // ajusta o path conforme teu projeto
 import Navbar from './components/Navbar'
+import { useNavigate } from 'react-router-dom';
 import './Cadastro.css'
 
 function Cadastro() {
+  const navigate = useNavigate()
   const { adicionarUsuario } = useContext(GlobalContext)
 
   const [formData, setFormData] = useState({
@@ -29,12 +31,16 @@ function Cadastro() {
 
     const novoUsuario = {
       nome: formData.nome,
+      cpf: formData.cpf,
+      telefone: formData.telefone,
+      email: formData.email,
+      nascimento: formData.nascimento,
       senha: formData.confirmarSenha
     }
 
     adicionarUsuario(novoUsuario)
-
     alert('Usuário cadastrado com sucesso!')
+    navigate('/login')
 
     setFormData({
       nome: '',
