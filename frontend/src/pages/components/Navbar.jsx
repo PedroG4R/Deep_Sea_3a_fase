@@ -30,6 +30,7 @@ function Navbar() {
           <Link className="link" to="/descricaoproduto">Descrição do Produto</Link>
           <Link className="link" to="/cadastro">Cadastro</Link>
           <Link className="link" to="/login">Login</Link>
+          <Link className="link" to="/Paineladm">PerfilADM</Link>
         </>
       ) : isCarrinhoPage ? (
         <>

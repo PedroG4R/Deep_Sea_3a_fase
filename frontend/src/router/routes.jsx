@@ -7,7 +7,7 @@ import Catálogo from "../pages/Catálogo";
 import DashboardVendedor from "../pages/DashboardVendedor";
 import DeletarConta from "../pages/DeletarConta";
 import Pagamento from "../pages/Pagamento";
-import PainelADM from "../pages/painelADM";
+import PainelADM from "../pages/PainelADM";
 import Perfil from "../pages/Perfil";
 import DescriçãoProduto from "../pages/DescriçãoProduto";
 
@@ -22,7 +22,7 @@ const router = createBrowserRouter([
     {path: "/descricaoproduto", element: <DescriçãoProduto />},
     {path: "/login", element: <Login />},
     {path: "/pagamento", element: <Pagamento />},
-    {path: "/paineladm", element: <PainelADM />},
+    {path: "/Paineladm", element: <PainelADM />},
     {path: "/perfil", element: <Perfil />},
 ])
 
