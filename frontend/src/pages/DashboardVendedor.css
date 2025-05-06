@@ -1,9 +1,83 @@
-.dashboard-container{
-    background-color: #0B63B6;
-    height: calc(100vh - 60px);
-    padding: 25px;
+.dashboard {
+    font-family: sans-serif;
+    padding: 20px;
+    background-color: #1f1f1f;
+    color: white;
+    min-height: 100vh;
+  }
+  
+  .section {
+    margin-bottom: 30px;
+  }
+  
+  .row {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-}
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+  
+  .box {
+    background-color: #333;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    width: 100px;
+    transition: background 0.2s;
+  }
+  .box:hover {
+    background-color: #444;
+  }
+  
+  .box img {
+    display: block;
+    margin: 0 auto 8px;
+  }
+  
+  .info {
+    font-size: 12px;
+    margin-top: 5px;
+  }
+  
+  .descricao-produto {
+    background-color: #f4f4f4;
+    color: #111;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+  }
+  
+  .btn {
+    background-color: #0066ff;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    margin-right: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .btn:hover {
+    background-color: #0044cc;
+  }
+  
+  .arrow {
+    font-size: 24px;
+    align-self: center;
+  }
+  
+  .circle {
+    background-color: #444;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    padding-top: 10px;
+    color: white;
+  }
+  
+  .label {
+    font-size: 12px;
+    margin-top: 4px;
+  }
+  
