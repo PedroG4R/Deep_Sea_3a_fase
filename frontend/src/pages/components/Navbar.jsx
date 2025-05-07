@@ -15,7 +15,8 @@ function Navbar() {
   const isPagamentoPage = location.pathname === "/pagamento";
   const isPainelADMPage = location.pathname === "/paineladm";
   const isPerfilPage = location.pathname === "/perfil";
-
+  const isProdutoPage = location.pathname ==="/produto";
+  
   return (
     <nav className="navbar-container">
       {isHomepage ? (
@@ -26,6 +27,8 @@ function Navbar() {
           <Link className="link" to="/cadastro">Cadastro</Link>
           <Link className="link" to="/login">Login</Link>
           <Link className="link" to="/Paineladm">PerfilADM</Link>
+          <Link className="link" to="/Produto">Produto</Link>
+
         </>
       ) : isCarrinhoPage ? (
         <>

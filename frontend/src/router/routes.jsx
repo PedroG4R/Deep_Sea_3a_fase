@@ -10,6 +10,7 @@ import Pagamento from "../pages/Pagamento";
 import PainelADM from "../pages/PainelADM";
 import Perfil from "../pages/Perfil";
 import DescriçãoProduto from "../pages/DescriçãoProduto";
+import Produto from "../pages/Produto";
 
 const router = createBrowserRouter([
     {path: "/", element: <Homepage />},
@@ -24,6 +25,7 @@ const router = createBrowserRouter([
     {path: "/pagamento", element: <Pagamento />},
     {path: "/Paineladm", element: <PainelADM />},
     {path: "/perfil", element: <Perfil />},
+    {path: "/produto", element: <Produto />},
 ])
 
 export default router;
