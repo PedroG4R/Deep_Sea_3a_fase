@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import { GlobalContext } from '../contexts/GlobalContext' // ajusta o path conforme teu projeto
+import { GlobalContext } from '../contexts/GlobalContext'
 import Navbar from './components/Navbar'
 import { useNavigate } from 'react-router-dom';
 import './Cadastro.css'
@@ -53,6 +53,8 @@ function Cadastro() {
     })
   }
 
+  const isFormValid = Object.values(formData).every((value) => value.trim() !== '')
+
   return (
     <div className='cadastro-container'>
       <Navbar />
@@ -79,7 +81,14 @@ function Cadastro() {
       <label>Confirmar senha</label>
       <input type="password" name="confirmarSenha" value={formData.confirmarSenha} onChange={handleChange} />
 
-      <button className='btn-cadastrar' onClick={handleCadastro}>Cadastrar</button>
+      <button 
+        className={`btn-cadastrar ${isFormValid ? '' : 'btn-disabled'}`} 
+        onClick={handleCadastro} 
+        disabled={!isFormValid}
+      >
+        Cadastrar
+      </button>
+      <button className='btn-login' onClick={() => navigate('/login')}>Já tenho uma conta</button>
     </div>
   )
 }

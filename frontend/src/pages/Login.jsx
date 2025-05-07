@@ -42,6 +42,7 @@ function Login() {
          onChange={(e) => setSenha(e.target.value)} />
 
         <button className='btn-entrar' onClick={handleLogin}>Entrar</button>
+        <button className='btn-cadastro' onClick={() => navigate('/cadastro')}>Não tenho uma conta</button>
 
     </div>
   )

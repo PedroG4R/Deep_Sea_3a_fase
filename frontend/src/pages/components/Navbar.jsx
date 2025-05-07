@@ -18,12 +18,7 @@ function Navbar() {
 
   return (
     <nav className="navbar-container">
-      {isLoginPage ? (
-        <>
-          <Link className="link" to="/">Homepage</Link>
-          <Link className="link" to="/cadastro">Cadastro</Link>
-        </>
-      ) : isHomepage ? (
+      {isHomepage ? (
         <>
           <Link className="link" to="/perfil">Perfil</Link>
           <Link className="link" to="/catalogo">Catálogo</Link>
@@ -77,13 +72,7 @@ function Navbar() {
           <Link className="link" to="/deletarconta">Deletar Conta</Link>
           <Link className="link" to="/descricaoproduto">Descrição do Produto</Link>
           <Link className="link" to="/catalogo">Catálogo</Link>
-        </>
-      ) : isCadastroPage ? (
-        <>
-          <Link className="link" to="/">Homepage</Link>
-        
-        
-        </>
+        </> 
       ) : null}
 
       <h1 className="text-title">Deep () Sea</h1>
