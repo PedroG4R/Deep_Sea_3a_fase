@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Produto.css';
-import Navbar from './components/Navbar'
+import Navbar from './components/Navbar';
 
 const Produto = () => {
   const [produtos, setProdutos] = useState([]);
@@ -20,7 +20,7 @@ const Produto = () => {
         id: Date.now(),
         nome,
         descricao,
-        preco,
+        preco: parseFloat(preco),
         foto,
         categoria,
         localizacao,
@@ -43,8 +43,8 @@ const Produto = () => {
     <div className="container">
       <div className='dashboard-container'>
         <Navbar />
-      
-    </div>
+      </div>
+
       <h1>Comprar e Vender Produtos</h1>
 
       <form className="formulario" onSubmit={handleAdicionarProduto}>
@@ -65,7 +65,7 @@ const Produto = () => {
             <h3>{produto.nome}</h3>
             <p><strong>Categoria:</strong> {produto.categoria}</p>
             <p><strong>Descrição:</strong> {produto.descricao}</p>
-            <p><strong>Preço:</strong> R$ {produto.preco}</p>
+            <p><strong>Preço:</strong> R$ {produto.preco.toFixed(2)}</p>
             <p><strong>Localização:</strong> {produto.localizacao}</p>
             <button onClick={() => adicionarAoCarrinho(produto)}>Adicionar ao Carrinho</button>
           </div>
@@ -75,7 +75,7 @@ const Produto = () => {
       <h2>Carrinho ({carrinho.length} itens)</h2>
       <ul className="carrinho-lista">
         {carrinho.map((item, index) => (
-          <li key={index}>{item.nome} - R$ {item.preco}</li>
+          <li key={index}>{item.nome} - R$ {item.preco.toFixed(2)}</li>
         ))}
       </ul>
     </div>
