@@ -23,75 +23,16 @@ function Navbar() {
   
   return (
     <nav className="navbar-container">
-      {isHomepage ? (
-        <>
           <Link className="link" to="/perfil">Perfil</Link>
           <Link className="link" to="/catalogo">Catálogo</Link>
           <Link className="link" to="/descricaoproduto">Descrição do Produto</Link>
           <Link className="link" to="/cadastro">Cadastro</Link>
+          <h1 className="text-title">Deep () Sea</h1>
           <Link className="link" to="/login">Login</Link>
           <Link className="link" to="/Paineladm">PerfilADM</Link>
           <Link className="link" to="/Produto">Produto</Link>
-
-        </>
-      ) : isCarrinhoPage ? (
-        <>
-          <Link className="link" to="/">Homepage</Link>
           <Link className="link" to="/pagamento">Pagamento</Link>
-        </>
-      ) : isCatalogoPage ? (
-        <>
           <Link className="link" to="/">Homepage</Link>
-          <Link className="link" to="/carrinho">Carrinho</Link>
-          <Link className="link" to="/descricaoproduto">Descrição do Produto</Link>
-          <Link className="link" to="/perfil">Perfil</Link>
-        </>
-      ) : isDashboardVendedorPage ? (
-        <>
-          <Link className="link" to="/">Homepage</Link>
-          <Link className="link" to="/descricaoproduto">Descrição do Produto</Link>
-          <Link className="link" to="/perfil">Perfil</Link>
-        </>
-      ) : isDeletarContaPage ? (
-        <>
-          <Link className="link" to="/">Homepage</Link>
-          <Link className="link" to="/cadastro">Cadastro</Link>
-        </>
-      ) : isDescricaoProdutoPage ? (
-        <>
-          <Link className="link" to="/">Homepage</Link>
-          <Link className="link" to="/carrinho">Carrinho</Link>
-          <Link className="link" to="/pagamento">Pagamento</Link>
-        </>
-      ) : isPagamentoPage ? (
-        <>
-          <Link className="link" to="/">Homepage</Link>
-        </>
-      ) : isPainelADMPage ? (
-        <>
-          <Link className="link" to="/">Homepage</Link>
-          <Link className="link" to="/perfil">Perfil</Link>
-          <Link className="link" to="/descricaoproduto">Descrição do Produto</Link>
-        </>
-      ) : isPerfilPage ? (
-        <>
-          <Link className="link" to="/">Homepage</Link>
-          <Link className="link" to="/deletarconta">Deletar Conta</Link>
-          <Link className="link" to="/descricaoproduto">Descrição do Produto</Link>
-          <Link className="link" to="/catalogo">Catálogo</Link>
-        </> 
-      ) : isProdutoPage ? (
-        <>
-          <Link className="link" to="/perfil">Perfil</Link>
-          <Link className="link" to="/catalogo">Catálogo</Link>
-          <Link className="link" to="/descricaoproduto">Descrição do Produto</Link>
-          <Link className="link" to="/cadastro">Cadastro</Link>
-          <Link className="link" to="/login">Login</Link>
-          <Link className="link" to="/Paineladm">PerfilADM</Link>
-        </>
-      ) : null}
-
-      <h1 className="text-title">Deep () Sea</h1>
     </nav>
   );
 }
