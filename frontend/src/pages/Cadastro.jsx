@@ -1,8 +1,9 @@
 import React, { useState, useContext } from 'react'
 import { GlobalContext } from '../contexts/GlobalContext'
-import Navbar from './components/Navbar'
+
 import { useNavigate } from 'react-router-dom';
 import './Cadastro.css'
+import Navbar from '../components/Navbar';
 
 function Cadastro() {
   const navigate = useNavigate()

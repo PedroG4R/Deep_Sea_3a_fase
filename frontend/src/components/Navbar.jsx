@@ -1,5 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import './Navbar.css';
+import { useEffect } from "react";
 
 function Navbar() {
   const location = useLocation();
@@ -16,6 +17,9 @@ function Navbar() {
   const isPainelADMPage = location.pathname === "/paineladm";
   const isPerfilPage = location.pathname === "/perfil";
   const isProdutoPage = location.pathname ==="/produto";
+  useEffect( ()=>{
+    console.log(isHomepage)
+  })
   
   return (
     <nav className="navbar-container">
@@ -76,6 +80,15 @@ function Navbar() {
           <Link className="link" to="/descricaoproduto">Descrição do Produto</Link>
           <Link className="link" to="/catalogo">Catálogo</Link>
         </> 
+      ) : isProdutoPage ? (
+        <>
+          <Link className="link" to="/perfil">Perfil</Link>
+          <Link className="link" to="/catalogo">Catálogo</Link>
+          <Link className="link" to="/descricaoproduto">Descrição do Produto</Link>
+          <Link className="link" to="/cadastro">Cadastro</Link>
+          <Link className="link" to="/login">Login</Link>
+          <Link className="link" to="/Paineladm">PerfilADM</Link>
+        </>
       ) : null}
 
       <h1 className="text-title">Deep () Sea</h1>

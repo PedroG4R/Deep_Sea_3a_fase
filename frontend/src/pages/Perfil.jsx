@@ -1,6 +1,7 @@
 import React from 'react'
-import Navbar from './components/Navbar'
+
 import './Perfil.css'
+import Navbar from '../components/Navbar'
 
 function Perfil() {
   return (

@@ -1,10 +1,8 @@
 
-import Navbar from './components/Navbar'
-
-
-import './Catálogo.css'
+import './Catalogo.css'
 import React, { useState } from 'react';
 import Produto from './Produto';
+import Navbar from '../components/Navbar';
 
 const Catalogo = () => {
   

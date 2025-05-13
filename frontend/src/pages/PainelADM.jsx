@@ -1,6 +1,7 @@
 import React from 'react';
-import Navbar from './components/Navbar';
+
 import './PainelADM.css';
+import Navbar from '../components/Navbar';
 
 function PainelADM() {
   return (

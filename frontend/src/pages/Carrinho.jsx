@@ -1,6 +1,7 @@
 import React from 'react'
-import Navbar from './components/Navbar'
+
 import './Carrinho.css'
+import Navbar from '../components/Navbar'
 
 function Carrinho() {
   return (

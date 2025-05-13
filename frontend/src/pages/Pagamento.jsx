@@ -1,6 +1,8 @@
 import React from 'react'
-import Navbar from './components/Navbar'
+
 import './Pagamento.css'
+import Navbar from '../components/Navbar'
+
 
 function Pagamento() {
   return (

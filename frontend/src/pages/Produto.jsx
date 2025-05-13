@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Produto.css';
-import Navbar from './components/Navbar';
+import Navbar from '../components/Navbar'; 
 
 const Produto = () => {
   const [produtos, setProdutos] = useState([]);
@@ -39,10 +39,18 @@ const Produto = () => {
     setCarrinho([...carrinho, produto]);
   };
 
+  const removerProduto = (id) => {
+    const confirmar = window.confirm("Tem certeza que deseja excluir este produto?");
+    if (confirmar) {
+      setProdutos(produtos.filter(produto => produto.id !== id));
+      setCarrinho(carrinho.filter(item => item.id !== id));
+    }
+  };
+
   return (
     <div className="container">
       <div className='dashboard-container'>
-        <Navbar />
+        <Navbar /> 
       </div>
 
       <h1>Comprar e Vender Produtos</h1>
@@ -68,6 +76,7 @@ const Produto = () => {
             <p><strong>Preço:</strong> R$ {produto.preco.toFixed(2)}</p>
             <p><strong>Localização:</strong> {produto.localizacao}</p>
             <button onClick={() => adicionarAoCarrinho(produto)}>Adicionar ao Carrinho</button>
+            <button onClick={() => removerProduto(produto.id)} className="btn-excluir">Excluir Produto</button>
           </div>
         ))}
       </div>

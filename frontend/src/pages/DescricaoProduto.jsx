@@ -1,8 +1,9 @@
 import React from 'react'
-import Navbar from './components/Navbar'
-import './DescriçãoProduto.css'
 
-function DescriçãoProduto() {
+import './DescricaoProduto.css'
+import Navbar from '../components/Navbar'
+
+function DescricaoProduto() {
   return (
     <div className='descricao-container'>
         <Navbar />
@@ -11,4 +12,4 @@ function DescriçãoProduto() {
   )
 }
 
-export default DescriçãoProduto
+export default DescricaoProduto

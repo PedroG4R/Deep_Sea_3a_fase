@@ -1,4 +1,5 @@
-import Navbar from './components/Navbar'
+
+import Navbar from '../components/Navbar';
 import './DashboardVendedor.css'
 import React, { useState } from 'react';
 

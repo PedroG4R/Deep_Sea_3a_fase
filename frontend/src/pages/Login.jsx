@@ -1,8 +1,9 @@
 import React, { useState, useContext } from 'react'
-import Navbar from './components/Navbar'
+
 import './Login.css'
 import { GlobalContext } from '../contexts/GlobalContext'
 import { useNavigate } from 'react-router-dom';
+import Navbar from '../components/Navbar';
 
 function Login() {
   const { usuarios } = useContext(GlobalContext)
