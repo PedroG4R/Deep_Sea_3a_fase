@@ -17,9 +17,6 @@ function Navbar() {
   const isPainelADMPage = location.pathname === "/paineladm";
   const isPerfilPage = location.pathname === "/perfil";
   const isProdutoPage = location.pathname ==="/produto";
-  useEffect( ()=>{
-    console.log(isHomepage)
-  })
   
   return (
     <nav className="navbar-container">
@@ -27,6 +24,7 @@ function Navbar() {
           <Link className="link" to="/catalogo">Catálogo</Link>
           <Link className="link" to="/descricaoproduto">Descrição do Produto</Link>
           <Link className="link" to="/cadastro">Cadastro</Link>
+          <Link className="link" to="/carrinho">Carrinho</Link>
           <h1 className="text-title">Deep () Sea</h1>
           <Link className="link" to="/login">Login</Link>
           <Link className="link" to="/Paineladm">PerfilADM</Link>

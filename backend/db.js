@@ -50,22 +50,22 @@ async function selectCustomer(id) {
 }
 
 async function insertCustomer(data) {
-  const { nome, cpf, telefone, datanascimento, senha } = data;
+  const { nome, cpf, telefone, nascimento, senha } = data;
   const client = new Client(clientConfig);
   await client.connect();
   await client.query(
     'INSERT INTO usuarios (nome, cpf, telefone, datanascimento, senha) VALUES ($1, $2, $3, $4, $5)',
-    [nome, cpf, telefone, datanascimento, senha]
+    [nome, cpf, telefone, nascimento, senha]
   );
   await client.end();
 }
 
 async function updateCustomer(id, data) {
-  const { nome, cpf, telefone, datanascimento, senha } = data;
+  const { nome, cpf, telefone, nascimento, senha } = data;
   const client = new Client(clientConfig);
   await client.connect();
   await client.query(
-    'UPDATE usuarios SET nome = $1, cpf = $2, telefone = $3, datanascimento = $4, senha = $5 WHERE id = $6',
+    'UPDATE usuarios SET nome = $1, cpf = $2, telefone = $3, nascimento = $4, senha = $5 WHERE id = $6',
     [nome, cpf, telefone, datanascimento, senha, id]
   );
   await client.end();
