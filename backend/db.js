@@ -9,6 +9,11 @@ const clientConfig = {
   database: process.env.DB_NAME,
 };
 
+
+
+
+
+
 const createTableQuery = `
   CREATE TABLE IF NOT EXISTS usuarios (
     id SERIAL PRIMARY KEY,

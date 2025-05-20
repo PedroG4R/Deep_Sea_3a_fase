@@ -1,7 +1,7 @@
 import './Produto.css'
 import { BsFire } from "react-icons/bs";
 import { GiBrazil } from "react-icons/gi";
-// function Produto(props) {
+
 function Produto({img, nome, preco, descricao}) {
   return (
     <div className="container-produto">
