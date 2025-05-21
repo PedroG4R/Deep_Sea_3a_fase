@@ -8,8 +8,8 @@ https://github.com/Philiposobjj
 
 Requisitos funcionais do projeto:
 - Cadastro de usuário (Théo)
-- Cadastro de produto e gestão de estoque
-- Dashboard do vendedor  (Philip)
+- Cadastro de produto e gestão de estoque (Phillip)
+- Dashboard do vendedor  
 - Painel do ADM (Pedro)
 - Carrinho e check-out
 
