@@ -9,85 +9,153 @@ const clientConfig = {
   database: process.env.DB_NAME,
 };
 
+async function query(sql, params = []) {
+  const client = new Client(clientConfig);
+  await client.connect();
+  const result = await client.query(sql, params);
+  await client.end();
+  return result;
+}
 
+async function createUsuariosTable() {
+  const sql = `
+    CREATE TABLE IF NOT EXISTS usuarios (
+      id SERIAL PRIMARY KEY,
+      nome VARCHAR(100) NOT NULL,
+      cpf VARCHAR(11) UNIQUE NOT NULL,
+      telefone BIGINT,
+      datanascimento DATE,
+      senha VARCHAR(255) NOT NULL,
+      adm BOOLEAN NOT NULL DEFAULT false
+    );
+  `;
+  await query(sql);
+}
 
-
-
-
-const createTableQuery = `
-  CREATE TABLE IF NOT EXISTS usuarios (
-    id SERIAL PRIMARY KEY,
-    nome VARCHAR(100) NOT NULL,
-    cpf VARCHAR(11) UNIQUE NOT NULL,
-    telefone BIGINT,
-    datanascimento DATE,
-    senha VARCHAR(255) NOT NULL
+async function insertUsuario(data) {
+  const { nome, cpf, telefone, datanascimento, senha, adm = false } = data;
+  await query(
+    `INSERT INTO usuarios (nome, cpf, telefone, datanascimento, senha, adm)
+     VALUES ($1, $2, $3, $4, $5, $6)`,
+    [nome, cpf, telefone, datanascimento, senha, adm]
   );
-`;
-
-async function createTable() {
-  const client = new Client(clientConfig);
-  try {
-    await client.connect();
-    await client.query(createTableQuery);
-    console.log('✅ Tabela "usuarios" criada com sucesso.');
-  } catch (err) {
-    console.error('❌ Erro ao criar tabela:', err.message);
-  } finally {
-    await client.end();
-  }
 }
 
-async function selectCustomers() {
-  const client = new Client(clientConfig);
-  await client.connect();
-  const result = await client.query('SELECT * FROM usuarios');
-  await client.end();
-  return result.rows;
+async function selectUsuarios() {
+  const res = await query('SELECT * FROM usuarios');
+  return res.rows;
 }
 
-async function selectCustomer(id) {
-  const client = new Client(clientConfig);
-  await client.connect();
-  const result = await client.query('SELECT * FROM usuarios WHERE id = $1', [id]);
-  await client.end();
-  return result.rows[0];
+async function selectUsuario(id) {
+  const res = await query('SELECT * FROM usuarios WHERE id = $1', [id]);
+  return res.rows[0];
 }
 
-async function insertCustomer(data) {
-  const { nome, cpf, telefone, nascimento, senha } = data;
-  const client = new Client(clientConfig);
-  await client.connect();
-  await client.query(
-    'INSERT INTO usuarios (nome, cpf, telefone, datanascimento, senha) VALUES ($1, $2, $3, $4, $5)',
-    [nome, cpf, telefone, nascimento, senha]
+async function updateUsuario(id, data) {
+  const { nome, cpf, telefone, datanascimento, senha, adm } = data;
+  await query(
+    `UPDATE usuarios SET nome=$1, cpf=$2, telefone=$3, datanascimento=$4, senha=$5, adm=$6 WHERE id=$7`,
+    [nome, cpf, telefone, datanascimento, senha, adm, id]
   );
-  await client.end();
 }
 
-async function updateCustomer(id, data) {
-  const { nome, cpf, telefone, nascimento, senha } = data;
-  const client = new Client(clientConfig);
-  await client.connect();
-  await client.query(
-    'UPDATE usuarios SET nome = $1, cpf = $2, telefone = $3, nascimento = $4, senha = $5 WHERE id = $6',
-    [nome, cpf, telefone, datanascimento, senha, id]
+async function deleteUsuario(id) {
+  await query('DELETE FROM usuarios WHERE id=$1', [id]);
+}
+
+async function insertCategoria(nome) {
+  await query(`INSERT INTO categoria (nome) VALUES ($1)`, [nome]);
+}
+
+async function selectCategorias() {
+  const res = await query('SELECT * FROM categoria');
+  return res.rows;
+}
+
+async function insertProduto(data) {
+  const { nome, descricao, preco, imagem, estoque, id_categoria } = data;
+  await query(
+    `INSERT INTO produtos (nome, descricao, preco, imagem, estoque, id_categoria)
+     VALUES ($1, $2, $3, $4, $5, $6)`,
+    [nome, descricao, preco, imagem, estoque, id_categoria]
   );
-  await client.end();
 }
 
-async function deleteCustomer(id) {
-  const client = new Client(clientConfig);
-  await client.connect();
-  await client.query('DELETE FROM usuarios WHERE id = $1', [id]);
-  await client.end();
+async function selectProdutos() {
+  const res = await query('SELECT * FROM produtos');
+  return res.rows;
+}
+
+async function deleteProduto(id) {
+  await query('DELETE FROM produtos WHERE id = $1', [id]);
+}
+
+async function insertVenda(data) {
+  const { data_venda, numero_nf, subtotal, desconto, imposto, id_usuario } = data;
+  await query(
+    `INSERT INTO venda (data_venda, numero_nf, subtotal, desconto, imposto, id_usuario)
+     VALUES ($1, $2, $3, $4, $5, $6)`,
+    [data_venda, numero_nf, subtotal, desconto, imposto, id_usuario]
+  );
+}
+
+async function selectVendas() {
+  const res = await query('SELECT * FROM venda');
+  return res.rows;
+}
+
+async function insertItemVenda(data) {
+  const { id_produto, id_venda, quantidade, valor_unit } = data;
+  await query(
+    `INSERT INTO itens_venda (id_produto, id_venda, quantidade, valor_unit)
+     VALUES ($1, $2, $3, $4)`,
+    [id_produto, id_venda, quantidade, valor_unit]
+  );
+}
+
+async function selectItensVenda() {
+  const res = await query('SELECT * FROM itens_venda');
+  return res.rows;
+}
+
+
+async function insertEndereco(data) {
+  const { cep, numero, complemento, id_produto, id_usuario } = data;
+  await query(
+    `INSERT INTO endereco (cep, numero, complemento, id_produto, id_usuario)
+     VALUES ($1, $2, $3, $4, $5)`,
+    [cep, numero, complemento, id_produto, id_usuario]
+  );
+}
+
+async function selectEnderecos() {
+  const res = await query('SELECT * FROM endereco');
+  return res.rows;
 }
 
 module.exports = {
-  createTable,
-  selectCustomers,
-  selectCustomer,
-  insertCustomer,
-  updateCustomer,
-  deleteCustomer,
+  query,
+
+  createUsuariosTable,
+  insertUsuario,
+  selectUsuarios,
+  selectUsuario,
+  updateUsuario,
+  deleteUsuario,
+
+  insertCategoria,
+  selectCategorias,
+
+  insertProduto,
+  selectProdutos,
+  deleteProduto,
+
+  insertVenda,
+  selectVendas,
+
+  insertItemVenda,
+  selectItensVenda,
+
+  insertEndereco,
+  selectEnderecos
 };
