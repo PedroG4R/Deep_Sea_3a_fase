@@ -1,6 +1,6 @@
 import './Card.css'
 
-function Card({img, nome, preco, descricao}) {
+function Card({img, nome, preco, descricao, estoque}) {
   return (
     <div className="container-produto">
         <img src={img} alt="" className='img-produto'/>
