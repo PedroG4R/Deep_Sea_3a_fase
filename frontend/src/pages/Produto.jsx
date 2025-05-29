@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react'
+import { GlobalContext } from '../contexts/GlobalContext'
 import './Produto.css';
 import Navbar from '../components/Navbar';
 import Card from '../pages/Card';
@@ -12,6 +13,8 @@ function Produto() {
   const [inputImagem, setInputImagem] = useState(null);
   const [inputEstoque, setInputEstoque] = useState('');
 
+  const { adicionarProduto } = useContext(GlobalContext)
+
   function handleImagemChange(e) {
     const file = e.target.files[0];
     if (file) {
@@ -20,18 +23,20 @@ function Produto() {
     }
   }
 
-  function cadastrarProduto() {
+  async function cadastrarProduto() {
     const produto = {
-      id: Date.now(),
       nome: inputNome,
       preco: Number(inputPreco),
       descricao: inputDescricao,
       estoque: Number(inputEstoque),
-      img: inputImagem,
-      
+      imagem: inputImagem, // Certifique-se que no back-end está como "imagem", não "img"
     };
 
-    setProdutos([...produtos, produto]);
+    try {
+      await adicionarProduto(produto); // ⬅️ salva no banco via back-end
+    } catch (err) {
+      console.error('Erro ao cadastrar produto:', err);
+    }
 
     setInputNome('');
     setInputDescricao('');
@@ -43,7 +48,7 @@ function Produto() {
   return (
     <div className="formCadastro">
       <Navbar />
-      <h2>Cadastro de Produto</h2>
+      <h2 className='title-text'>Cadastro de Produto</h2>
 
       <div className="inputContainer">
         <label>Nome do Produto:</label>

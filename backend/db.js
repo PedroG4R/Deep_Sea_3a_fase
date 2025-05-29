@@ -149,20 +149,26 @@ async function selectCategorias() {
   return res.rows;
 }
 
-async function insertProduto(data) {
-  const { nome, descricao, preco, imagem, estoque, id_categoria } = data;
-  try {
-    await query(
-      `INSERT INTO produtos (nome, descricao, preco, imagem, estoque, id_categoria)
-       VALUES ($1, $2, $3, $4, $5, $6)`,
-      [nome, descricao, preco, imagem, estoque, id_categoria]
-    );
-    console.log("✅ Produto inserido com sucesso");
-  } catch (err) {
-    console.error("❌ Erro ao inserir produto:", err.message);
-  }
+async function insertProduto(produto) {
+  const { nome, descricao, preco, imagem, estoque, id_categoria = null } = produto;
+
+  await query(
+    `INSERT INTO produtos (nome, descricao, preco, imagem, estoque, id_categoria)
+     VALUES ($1, $2, $3, $4, $5, $6)`,
+    [nome, descricao, preco, imagem, estoque, id_categoria]
+  );
 }
 
+async function selectProdutos() {
+  const result = await query('SELECT * FROM produtos');
+  return result.rows;
+}
+
+module.exports = {
+  // ... outros exports
+  insertProduto,
+  selectProdutos,
+};
 
 async function selectProdutos() {
   const res = await query('SELECT * FROM produtos');

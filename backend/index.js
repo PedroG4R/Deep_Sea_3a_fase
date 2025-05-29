@@ -159,7 +159,6 @@ app.delete('/usuarios/:id', async (req, res) => {
   res.sendStatus(204);
 });
 
-// --- Categoria ---
 app.get('/categorias', async (req, res) => {
   const categorias = await db.selectCategorias();
   res.json(categorias);
@@ -170,7 +169,6 @@ app.post('/categorias', async (req, res) => {
   res.sendStatus(201);
 });
 
-// --- Produtos ---
 app.get('/produtos', async (req, res) => {
   const produtos = await db.selectProdutos();
   res.json(produtos);
@@ -187,7 +185,6 @@ app.post('/produtos', async (req, res) => {
   }
 });
 
-// --- Venda ---
 app.get('/vendas', async (req, res) => {
   const vendas = await db.selectVendas();
   res.json(vendas);

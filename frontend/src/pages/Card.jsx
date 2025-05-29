@@ -5,7 +5,7 @@ function Card({img, nome, preco, estoque, descricao}) {
     <div className="container-produto">
         <img src={img} alt="" className='img-produto'/>
         <h2>{nome}</h2>
-        <p>R${preco.toFixed(2)}</p>
+        <p>Preço: R$ {produto.preco ? Number(produto.preco).toFixed(2) : '0.00'}</p>
         <p>{descricao}</p>
         <p>Estoque: {estoque}</p>
     </div>

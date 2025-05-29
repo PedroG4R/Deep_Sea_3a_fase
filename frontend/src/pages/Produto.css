@@ -8,12 +8,12 @@ body {
 
 .formCadastro {
   background-color: #0B63B6;
-  min-height: calc(100vh - 60px);
-  padding: 25px;
+  height: calc(100vh - 60px);
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: white;
+  justify-content: flex-start;
+  padding-top: 100px; 
 }
 
 .formCadastro h2 {

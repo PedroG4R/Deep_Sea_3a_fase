@@ -12,7 +12,6 @@ export const GlobalContextProvider = ({ children }) => {
   const [enderecos, setEnderecos] = useState([])
   const [loading, setLoading] = useState(true)
 
-  // --- Usuários ---
   const fetchUsuarios = async () => {
     try {
       const response = await axios.get('http://localhost:3000/usuarios')
@@ -31,7 +30,6 @@ export const GlobalContextProvider = ({ children }) => {
     }
   }
 
-  // --- Produtos ---
   const fetchProdutos = async () => {
     try {
       const response = await axios.get('http://localhost:3000/produtos')
@@ -50,7 +48,6 @@ export const GlobalContextProvider = ({ children }) => {
     }
   }
 
-  // --- Categorias ---
   const fetchCategorias = async () => {
     try {
       const response = await axios.get('http://localhost:3000/categorias')
@@ -69,7 +66,6 @@ export const GlobalContextProvider = ({ children }) => {
     }
   }
 
-  // --- Vendas ---
   const fetchVendas = async () => {
     try {
       const response = await axios.get('http://localhost:3000/vendas')
@@ -88,7 +84,6 @@ export const GlobalContextProvider = ({ children }) => {
     }
   }
 
-  // --- Itens Venda ---
   const fetchItensVenda = async () => {
     try {
       const response = await axios.get('http://localhost:3000/itens_venda')
@@ -107,7 +102,6 @@ export const GlobalContextProvider = ({ children }) => {
     }
   }
 
-  // --- Endereços ---
   const fetchEnderecos = async () => {
     try {
       const response = await axios.get('http://localhost:3000/enderecos')
