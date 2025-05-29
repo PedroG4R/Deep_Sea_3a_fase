@@ -29,11 +29,11 @@ function Produto() {
       preco: Number(inputPreco),
       descricao: inputDescricao,
       estoque: Number(inputEstoque),
-      imagem: inputImagem, // Certifique-se que no back-end está como "imagem", não "img"
+      imagem: inputImagem,
     };
 
     try {
-      await adicionarProduto(produto); // ⬅️ salva no banco via back-end
+      await adicionarProduto(produto);
     } catch (err) {
       console.error('Erro ao cadastrar produto:', err);
     }

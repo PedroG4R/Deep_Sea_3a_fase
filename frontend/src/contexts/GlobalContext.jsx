@@ -48,6 +48,18 @@ export const GlobalContextProvider = ({ children }) => {
     }
   }
 
+  const deletarProduto = async (id) => {
+    try {
+      await fetch(`http://localhost:3001/produtos/${id}`, {
+        method: 'DELETE',
+      });
+  
+      setProdutos((prev) => prev.filter((produto) => produto.id !== id));
+    } catch (err) {
+      console.error('Erro ao deletar produto:', err);
+    }
+  };
+
   const fetchCategorias = async () => {
     try {
       const response = await axios.get('http://localhost:3000/categorias')
@@ -143,6 +155,7 @@ export const GlobalContextProvider = ({ children }) => {
         adicionarUsuario,
         produtos,
         adicionarProduto,
+        deletarProduto,
         categorias,
         adicionarCategoria,
         vendas,

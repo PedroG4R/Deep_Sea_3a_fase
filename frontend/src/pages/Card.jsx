@@ -1,15 +1,25 @@
-import './Card.css'
+import React, { useContext } from 'react';
+import { GlobalContext } from '../contexts/GlobalContext';
 
-function Card({img, nome, preco, estoque, descricao}) {
+const Card = ({ id, img, nome, preco, estoque, descricao }) => {
+  const { deletarProduto } = useContext(GlobalContext);
+
+  const handleDelete = () => {
+    if (window.confirm('Tem certeza que deseja excluir este produto?')) {
+      deletarProduto(id);
+    }
+  };
+
   return (
-    <div className="container-produto">
-        <img src={img} alt="" className='img-produto'/>
-        <h2>{nome}</h2>
-        <p>Preço: R$ {produto.preco ? Number(produto.preco).toFixed(2) : '0.00'}</p>
-        <p>{descricao}</p>
-        <p>Estoque: {estoque}</p>
+    <div className="card">
+      <img src={img} alt={nome} />
+      <h3>{nome}</h3>
+      <p>{descricao}</p>
+      <p>Preço: R$ {preco}</p>
+      <p>Estoque: {estoque}</p>
+      <button onClick={handleDelete}>Excluir</button>
     </div>
-  )
-}
+  );
+};
 
-export default Card
+export default Card;

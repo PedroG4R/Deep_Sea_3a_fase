@@ -206,7 +206,6 @@ app.post('/itens_venda', async (req, res) => {
   res.sendStatus(201);
 });
 
-// --- Endereco ---
 app.get('/enderecos', async (req, res) => {
   const enderecos = await db.selectEnderecos();
   res.json(enderecos);
@@ -216,6 +215,9 @@ app.post('/enderecos', async (req, res) => {
   await db.insertEndereco(req.body);
   res.sendStatus(201);
 });
+
+//delete route
+
 
 app.listen(port, () => {
   console.log(`✅ Backend is running on http://localhost:${port}`);
