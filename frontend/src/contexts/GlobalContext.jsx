@@ -21,6 +21,7 @@ export const GlobalContextProvider = ({ children }) => {
     }
   }
 
+  
   const adicionarUsuario = async (novoUsuario) => {
     try {
       const response = await axios.post('http://localhost:3000/usuarios', novoUsuario)

@@ -1,9 +1,74 @@
-.perfil-container{
-    background-color: #0B63B6;
-    height: calc(100vh - 60px);
-    padding: 25px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
+.perfil-container {
+  background-color: #0077cc;
+  min-height: 100vh;
+  padding: 20px;
+  color: white;
+}
+
+.perfil-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.perfil-esquerda {
+  width: 35%;
+  padding: 20px;
+}
+
+.perfil-direita {
+  width: 60%;
+}
+
+.foto-perfil {
+  font-size: 60px;
+  margin: 20px 0;
+}
+
+.dados p {
+  margin: 5px 0;
+}
+
+.produtos-grid,
+.interesses-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.produto,
+.interesse,
+.add-produto {
+  background: white;
+  color: black;
+  padding: 20px;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.scroll {
+  background-color: lightblue;
+  text-align: center;
+  padding: 20px;
+  font-weight: bold;
+}
+
+.btn-editar,
+.btn-deletar,
+.btn-mais {
+  margin-top: 10px;
+  background-color: #00aaff;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+}
+
+.btn-voltar {
+  background: #00aaff;
+  color: white;
+  border: none;
+  font-size: 20px;
+  border-radius: 5px;
 }
