@@ -47,6 +47,23 @@ body {
   box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.4);
 }
 
+.inputContainer select {
+  padding: 10px 15px;
+  font-size: 16px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.inputContainer select:focus {
+  outline: none;
+  border-color: #4a90e2;
+  box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+  background-color: #f0f8ff;
+}
+
 .formCadastro button {
   background-color: #007acc;
   color: white;

@@ -24,6 +24,7 @@ export const GlobalContextProvider = ({ children }) => {
   const adicionarUsuario = async (novoUsuario) => {
     try {
       const response = await axios.post('http://localhost:3000/usuarios', novoUsuario)
+      console.log("response=====> ", response)
       setUsuarios((prev) => [...prev, response.data])
     } catch (error) {
       console.error('❌ Erro ao adicionar usuário:', error.message)

@@ -7,7 +7,7 @@ const Card = ({ id, img, nome, preco, estoque, descricao, categoria }) => {
   const navigate = useNavigate();
 
   const handleDelete = (e) => {
-    e.stopPropagation(); // Evita que o clique no botão também abra a página
+    e.stopPropagation();
     if (window.confirm('Tem certeza que deseja excluir este produto?')) {
       deletarProduto(id);
     }

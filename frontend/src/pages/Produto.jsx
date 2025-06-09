@@ -11,7 +11,8 @@ function Produto() {
   const [inputDescricao, setInputDescricao] = useState('');
   const [inputPreco, setInputPreco] = useState('');
   const [inputImagem, setInputImagem] = useState(null);
-  const [inputEstoque, setInputEstoque] = useState('');
+  const [inputEstoque, setInputEstoque] = useState(null);
+  const [inputCategoria, setInputCategoria] = useState(null);
 
   const { adicionarProduto } = useContext(GlobalContext)
 
@@ -29,6 +30,7 @@ function Produto() {
       preco: Number(inputPreco),
       descricao: inputDescricao,
       estoque: Number(inputEstoque),
+      categoria: inputCategoria,
       imagem: inputImagem,
     };
 
@@ -42,6 +44,7 @@ function Produto() {
     setInputDescricao('');
     setInputPreco('');
     setInputEstoque('');
+    setInputCategoria('');
     setInputImagem(null);
   }
 
@@ -87,6 +90,31 @@ function Produto() {
       </div>
 
       <div className="inputContainer">
+      <label>Categoria:</label>
+      <select
+      value={inputCategoria || ''}
+      onChange={(e) => setInputCategoria(e.target.value)}
+      >
+      <option value="" disabled>Selecione uma categoria</option>
+      <option value="eletronicos">Eletrônicos</option>
+      <option value="moda">Moda</option>
+      <option value="beleza">Beleza</option>
+      <option value="casa">Casa</option>
+      <option value="esportes">Esportes</option>
+      <option value="livros">Livros</option>
+      <option value="brinquedos">Brinquedos</option>
+      <option value="automotivo">Automotivo</option>
+      <option value="informatica">Informática</option>
+      <option value="saude">Saúde</option>
+      <option value="alimentacao">Alimentação</option>
+      <option value="ferramentas">Ferramentas</option>
+      <option value="musica">Música</option>
+      <option value="petshop">Pet Shop</option>
+      <option value="jardinagem">Jardinagem</option>
+      </select>
+      </div>
+
+      <div className="inputContainer">
         <label>Imagem (upload):</label>
         <input 
           type="file"
@@ -113,6 +141,7 @@ function Produto() {
             preco={produto.preco}
             estoque={produto.estoque}
             descricao={produto.descricao}
+            categoria={produto.categoria}
           />
         ))}
       </div>

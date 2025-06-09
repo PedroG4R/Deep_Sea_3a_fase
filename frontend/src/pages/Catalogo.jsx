@@ -1,6 +1,5 @@
 import './Catalogo.css';
 import React, { useContext } from 'react';
-import Produto from './Produto';
 import Card from './Card'; 
 import Navbar from '../components/Navbar';
 import { GlobalContext } from '../contexts/GlobalContext';
