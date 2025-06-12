@@ -28,11 +28,13 @@ export const GlobalContextProvider = ({ children }) => {
   
   const adicionarUsuario = async (novoUsuario) => {
     try {
+
       const response = await axios.post(
         "http://localhost:3000/usuarios",
         novoUsuario
       );
       setUsuarios((prevUsuarios) => [...prevUsuarios, response.data]);
+
     } catch (error) {
       console.error('❌ Erro ao adicionar usuário:', error.message);
     }
@@ -65,6 +67,18 @@ export const GlobalContextProvider = ({ children }) => {
       setProdutos((prevProdutos) => [...prevProdutos, response.data]);
     } catch (error) {
       console.error('❌ Erro ao adicionar produto:', error.message);
+    }
+  };
+
+  const deletarProduto = async (id) => {
+    try {
+      await fetch(`http://localhost:3001/produtos/${id}`, {
+        method: 'DELETE',
+      });
+  
+      setProdutos((prev) => prev.filter((produto) => produto.id !== id));
+    } catch (err) {
+      console.error('Erro ao deletar produto:', err);
     }
   };
 
@@ -178,6 +192,7 @@ export const GlobalContextProvider = ({ children }) => {
         deletarUsuario,
         produtos,
         adicionarProduto,
+        deletarProduto,
         categorias,
         adicionarCategoria,
         vendas,

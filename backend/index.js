@@ -140,6 +140,7 @@ app.get('/usuarios/:id', async (req, res) => {
 });
 
 app.post('/usuarios', async (req, res) => {
+  // console.log("No backend - req.body====>>>> ", req.body)
   try {
     const novoUsuario = await db.insertUsuario(req.body);
     res.status(201).json(novoUsuario);
@@ -206,7 +207,6 @@ app.post('/itens_venda', async (req, res) => {
   res.sendStatus(201);
 });
 
-// --- Endereco ---
 app.get('/enderecos', async (req, res) => {
   const enderecos = await db.selectEnderecos();
   res.json(enderecos);
@@ -216,6 +216,9 @@ app.post('/enderecos', async (req, res) => {
   await db.insertEndereco(req.body);
   res.sendStatus(201);
 });
+
+//delete route
+
 
 app.listen(port, () => {
   console.log(`✅ Backend is running on http://localhost:${port}`);
