@@ -1,29 +1,42 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import './Perfil.css'
 import { GlobalContext } from '../contexts/GlobalContext'
 import { useNavigate } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 
 function Perfil() {
-  const { usuarioLogado, setUsuarioLogado } = useContext(GlobalContext)
-  const navigate = useNavigate()
+  const {
+    usuarioLogado,
+    setUsuarioLogado,
+    deletarUsuario, 
+  } = useContext(GlobalContext);
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     setUsuarioLogado(null)
     navigate('/login')
   }
 
-  const handleDelete = () => {
-    // Aqui você pode implementar a exclusão definitiva no seu contexto ou banco de dados
-    alert('Conta deletada com sucesso!')
-    setUsuarioLogado(null)
-    navigate('/cadastro')
-  }
 
-  if (!usuarioLogado) {
-    navigate('/login')
-    return null
+
+  useEffect(() =>{
+    if (!usuarioLogado) {
+    navigate('/login');
   }
+}, [usuarioLogado, navigate]);
+
+if (!usuarioLogado) return null;
+
+
+const handleDelete = async () => {
+  const confirm = window.confirm("Tem certeza que deseja deltar sua conta?");
+  if (confirm) {
+    await deletarUsuario(usuarioLogado.id);
+    setUsuarioLogado(null);
+    alert("Conta deletada com sucesso.");
+    navigate('/cadastro');
+  }
+};
 
   return (
     <div className="perfil-container">
