@@ -140,7 +140,6 @@ app.get('/usuarios/:id', async (req, res) => {
 });
 
 app.post('/usuarios', async (req, res) => {
-  // console.log("No backend - req.body====>>>> ", req.body)
   try {
     const novoUsuario = await db.insertUsuario(req.body);
     res.status(201).json(novoUsuario);

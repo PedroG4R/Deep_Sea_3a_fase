@@ -1,13 +1,13 @@
 require('dotenv').config();
 const { Pool } = require('pg');
 
-// const clientConfig =  {
-//   host: process.env.DB_HOST,
-//   port: process.env.DB_PORT,
-//   user: process.env.DB_USER,
-//   password: process.env.DB_PASSWORD,
-//   database: process.env.DB_NAME,
-// };
+const clientConfig =  {
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+};
 
 // ------------------------------------------------------------------
 async function connect() {  
@@ -26,6 +26,7 @@ async function connect() {
   
   const client = await pool.connect();
   console.log("O Pool de conexão foi criado com sucesso!")
+
   client.release();
 
   global.connection = pool;
@@ -136,20 +137,19 @@ async function insertUsuario(data) {
   console.log("data data data ===>> ",data)
   const client = await connect();
 
-  const sql = "INSERT INTO usuario (nome, cpf, telefone, nascimento, senha, adm) VALUES ($1, $2, $3, $4, $5, $6)  RETURNING *"
-  const values = [data.nome, data.cpf, data.telefone, data.nascimento, data.senha, data.adm]
+  // const sql = "INSERT INTO usuario (nome, cpf, telefone, nascimento, senha, adm) VALUES ($1, $2, $3, $4, $5, $6)  RETURNING *"
+  // const values = [data.nome, data.cpf, data.telefone, data.nascimento, data.senha, data.adm]
 
-  const result = await client.query(sql, values)
+  // const result = await client.query(sql, values)
 
-  // const { nome, cpf, telefone, datanascimento, senha, adm = false } = data;
-  // const result = await client.query(
-  //   `INSERT INTO usuarios (nome, cpf, telefone, datanascimento, senha, adm)
-  //    VALUES ($1, $2, $3, $4, $5, $6)
-  //    RETURNING *`,
-  //   [nome, cpf, telefone, datanascimento, senha, adm]
-  // );
-
-  // const client = await 
+  const { nome, cpf, telefone, datanascimento, senha, adm = false } = data;
+ const result = await client.query(
+    `INSERT INTO usuarios (nome, cpf, telefone, datanascimento, senha, adm)
+      VALUES ($1, $2, $3, $4, $5, $6)
+      RETURNING *`,
+   [nome, cpf, telefone, datanascimento, senha, adm]
+   );
+  //const client = await 
   // const sql = "INSERT INTO usuarios (nome, cpf, telefone, datanascimento, senha, adm) VALUES ($1, $2, $3, $4, $5, $6)  RETURNING *"
   // const values = [data.nome, data.cpf, data.telefone, data.datanascimento, data.senha, data.adm]
 
@@ -157,131 +157,136 @@ async function insertUsuario(data) {
   return result.rows[0];
 }
 
-// async function selectUsuarios() {
-//   const res = await query('SELECT * FROM usuarios');
-//   return res.rows;
-// }
+ async function selectUsuarios() {
+  const client = await connect();
+  const res = await client.query('SELECT * FROM usuarios');
+  return res.rows;
+}
 
-// async function selectUsuario(id) {
-//   const res = await query('SELECT * FROM usuarios WHERE id = $1', [id]);
-//   return res.rows[0];
-// }
+async function selectUsuario(id) {
+  const client = await connect();
+  const res = await client.query('SELECT * FROM usuarios WHERE id = $1', [id]);
+  return res.rows[0];
+}
 
-// async function updateUsuario(id, data) {
-//   const { nome, cpf, telefone, datanascimento, senha, adm } = data;
-//   await query(
-//     `UPDATE usuarios SET nome=$1, cpf=$2, telefone=$3, datanascimento=$4, senha=$5, adm=$6 WHERE id=$7`,
-//     [nome, cpf, telefone, datanascimento, senha, adm, id]
-//   );
-// }
+async function updateUsuario(id, data) {
+  const client = await connect();
+  const { nome, cpf, telefone, datanascimento, senha, adm } = data;
+  await client.query(
+    `UPDATE usuarios SET nome=$1, cpf=$2, telefone=$3, datanascimento=$4, senha=$5, adm=$6 WHERE id=$7`,
+    [nome, cpf, telefone, datanascimento, senha, adm, id]
+  );
+}
 
-// async function deleteUsuario(id) {
-//   await query('DELETE FROM usuarios WHERE id=$1', [id]);
-// }
+async function deleteUsuario(id) {
+  const client = await connect();
+  await client.query('DELETE FROM usuarios WHERE id=$1', [id]);
+}
 
-// async function insertCategoria(nome) {
-//   await query(`INSERT INTO categoria (nome) VALUES ($1)`, [nome]);
-// }
+async function insertCategoria(nome) {
+  const client = await connect();
+  await client.query(`INSERT INTO categoria (nome) VALUES ($1)`, [nome]);
+}
 
-// async function selectCategorias() {
-//   const res = await query('SELECT * FROM categoria');
-//   return res.rows;
-// }
+async function selectCategorias() {
+  const client = await connect();
+  const res = await client.query('SELECT * FROM categoria');
+  return res.rows;
+}
 
-// async function insertProduto(produto) {
-//   const { nome, descricao, preco, imagem, estoque, id_categoria = null } = produto;
+async function insertProduto(produto) {
+  const client = await connect();
+  const { nome, descricao, preco, imagem, estoque, id_categoria = null } = produto;
 
-//   await query(
-//     `INSERT INTO produtos (nome, descricao, preco, imagem, estoque, id_categoria)
-//      VALUES ($1, $2, $3, $4, $5, $6)`,
-//     [nome, descricao, preco, imagem, estoque, id_categoria]
-//   );
-// }
+  await client.query(
+    `INSERT INTO produtos (nome, descricao, preco, imagem, estoque, id_categoria)
+     VALUES ($1, $2, $3, $4, $5, $6)`,
+    [nome, descricao, preco, imagem, estoque, id_categoria]
+  );
+}
 
-// async function selectProdutos() {
-//   const result = await query('SELECT * FROM produtos');
-//   return result.rows;
-// }
+async function selectProdutos() {
+  const client = await connect();
+  const result = await client.query('SELECT * FROM produtos');
+  return result.rows;
+}
 
-// module.exports = {
-//   insertProduto,
-//   selectProdutos,
-// };
+async function deleteProduto(id) {
+  const client = await connect();
+  await client.query('DELETE FROM produtos WHERE id = $1', [id]);
+}
 
-// async function selectProdutos() {
-//   const res = await query('SELECT * FROM produtos');
-//   return res.rows;
-// }
+async function insertVenda(data) {
+  const client = await connect();
+  const { data_venda, numero_nf, subtotal, desconto, imposto, id_usuario } = data;
+  await client.query(
+    `INSERT INTO venda (data_venda, numero_nf, subtotal, desconto, imposto, id_usuario)
+     VALUES ($1, $2, $3, $4, $5, $6)`,
+    [data_venda, numero_nf, subtotal, desconto, imposto, id_usuario]
+  );
+}
 
-// async function deleteProduto(id) {
-//   await query('DELETE FROM produtos WHERE id = $1', [id]);
-// }
+async function selectVendas() {
+  const client = await connect();
+  const res = await client.query('SELECT * FROM venda');
+  return res.rows;
+}
 
-// async function insertVenda(data) {
-//   const { data_venda, numero_nf, subtotal, desconto, imposto, id_usuario } = data;
-//   await query(
-//     `INSERT INTO venda (data_venda, numero_nf, subtotal, desconto, imposto, id_usuario)
-//      VALUES ($1, $2, $3, $4, $5, $6)`,
-//     [data_venda, numero_nf, subtotal, desconto, imposto, id_usuario]
-//   );
-// }
+async function insertItemVenda(data) {
+  const client = await connect();
+  const { id_produto, id_venda, quantidade, valor_unit } = data;
+  await client.query(
+    `INSERT INTO itens_venda (id_produto, id_venda, quantidade, valor_unit)
+     VALUES ($1, $2, $3, $4)`,
+    [id_produto, id_venda, quantidade, valor_unit]
+  );
+}
 
-// async function selectVendas() {
-//   const res = await query('SELECT * FROM venda');
-//   return res.rows;
-// }
+async function selectItensVenda() {
+  const client = await connect();
+  const res = await client.query('SELECT * FROM itens_venda');
+  return res.rows;
+}
 
-// async function insertItemVenda(data) {
-//   const { id_produto, id_venda, quantidade, valor_unit } = data;
-//   await query(
-//     `INSERT INTO itens_venda (id_produto, id_venda, quantidade, valor_unit)
-//      VALUES ($1, $2, $3, $4)`,
-//     [id_produto, id_venda, quantidade, valor_unit]
-//   );
-// }
+async function insertEndereco(data) {
+  const client = await connect();
+  const { cep, numero, complemento, id_produto, id_usuario } = data;
+  await client.query(
+    `INSERT INTO endereco (cep, numero, complemento, id_produto, id_usuario)
+     VALUES ($1, $2, $3, $4, $5)`,
+    [cep, numero, complemento, id_produto, id_usuario]
+  );
+}
 
-// async function selectItensVenda() {
-//   const res = await query('SELECT * FROM itens_venda');
-//   return res.rows;
-// }
-
-// async function insertEndereco(data) {
-//   const { cep, numero, complemento, id_produto, id_usuario } = data;
-//   await query(
-//     `INSERT INTO endereco (cep, numero, complemento, id_produto, id_usuario)
-//      VALUES ($1, $2, $3, $4, $5)`,
-//     [cep, numero, complemento, id_produto, id_usuario]
-//   );
-// }
-
-// async function selectEnderecos() {
-//   const res = await query('SELECT * FROM endereco');
-//   return res.rows;
-// }
+async function selectEnderecos() {
+  const client = await connect();
+  const res = await client.query('SELECT * FROM endereco');
+  return res.rows;
+}
 
 module.exports = {
   query,
   createTables,
 
   insertUsuario,
-  // selectUsuarios
-  // selectUsuario,
-  // updateUsuario,
-  // deleteUsuario,
+  selectUsuarios,
+  selectUsuario,
+  updateUsuario,
+  deleteUsuario,
 
-  // insertCategoria,
-  // selectCategorias,
+  insertCategoria,
+  selectCategorias,
 
-  // insertProduto,
-  // selectProdutos,
-  // deleteProduto,
+  insertProduto,
+  selectProdutos,
+  deleteProduto,
 
-  // insertVenda,
-  // selectVendas,
+  insertVenda,
+  selectVendas,
 
-  // insertItemVenda,
-  // selectItensVenda,
+  insertItemVenda,
+  selectItensVenda,
 
-  // insertEndereco,
-  // selectEnderecos
+  insertEndereco,
+  selectEnderecos
 };
