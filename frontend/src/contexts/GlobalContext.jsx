@@ -1,216 +1,126 @@
-import { createContext, useEffect, useState } from 'react'
-import axios from 'axios'
+// src/contexts/GlobalContext.jsx
+import { createContext, useEffect, useState } from 'react';
+import axios from 'axios';
 
-export const GlobalContext = createContext()
+const GlobalContext = createContext();
 
-export const GlobalContextProvider = ({ children }) => {
-  const [usuarios, setUsuarios] = useState([])
-  const [usuarioLogado, setUsuarioLogado] = useState(null); // ✅ NOVO
-  const [produtos, setProdutos] = useState([])
-  const [categorias, setCategorias] = useState([])
-  const [vendas, setVendas] = useState([])
-  const [itensVenda, setItensVenda] = useState([])
-  const [enderecos, setEnderecos] = useState([])
-  const [loading, setLoading] = useState(true)
+const GlobalContextProvider = ({ children }) => {
+  const [usuarios, setUsuarios] = useState([]);
+  const [produtos, setProdutos] = useState([]);
+  const [categorias, setCategorias] = useState([]);
+  const [vendas, setVendas] = useState([]);
+  const [itensVenda, setItensVenda] = useState([]);
+  const [enderecos, setEnderecos] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [carrinho, setCarrinho] = useState([]);
 
+  // 🔁 Fetch de dados
   const fetchUsuarios = async () => {
-    setLoading(true);
     try {
-      const response = await axios.get('http://localhost:3000/usuarios')
-      setUsuarios(response.data)
+      const response = await axios.get('http://localhost:3000/usuarios');
+      setUsuarios(response.data);
     } catch (error) {
       console.error('❌ Erro ao buscar usuários:', error.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  
-  const adicionarUsuario = async (novoUsuario) => {
-    try {
-
-      const response = await axios.post(
-        "http://localhost:3000/usuarios",
-        novoUsuario
-      );
-      setUsuarios((prevUsuarios) => [...prevUsuarios, response.data]);
-
-    } catch (error) {
-      console.error('❌ Erro ao adicionar usuário:', error.message);
-    }
-  };
-
-  const deletarUsuario = async (id) => {
-    try {
-      await anxios.delete('http://localhost:3000/usuarios/%{id}');
-      setUsuarios((prev) => prev.filter((u) => u.id !== id));
-    } catch (error) {
-      console.error("Erro ao deletar usuário:", error.message);
     }
   };
 
   const fetchProdutos = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/produtos");
+      const response = await axios.get('http://localhost:3000/produtos');
       setProdutos(response.data);
     } catch (error) {
       console.error('❌ Erro ao buscar produtos:', error.message);
     }
   };
 
+  // ➕ Adição
+  const adicionarUsuario = async (novoUsuario) => {
+    try {
+      const response = await axios.post('http://localhost:3000/usuarios', novoUsuario);
+      setUsuarios((prev) => [...prev, response.data]);
+    } catch (error) {
+      console.error('❌ Erro ao adicionar usuário:', error.message);
+    }
+  };
+
   const adicionarProduto = async (novoProduto) => {
     try {
-      const response = await axios.post(
-        "http://localhost:3000/produtos",
-        novoProduto
-      );
-      setProdutos((prevProdutos) => [...prevProdutos, response.data]);
+      const response = await axios.post('http://localhost:3000/produtos', novoProduto);
+      setProdutos((prev) => [...prev, response.data]);
     } catch (error) {
       console.error('❌ Erro ao adicionar produto:', error.message);
     }
   };
 
+  // ✏️ Edição
+  const editarProduto = async (id, dadosAtualizados) => {
+    try {
+      const response = await axios.put(`http://localhost:3000/produtos/${id}`, dadosAtualizados);
+      setProdutos((prev) =>
+        prev.map((produto) => (produto.id === id ? response.data : produto))
+      );
+    } catch (error) {
+      console.error('❌ Erro ao editar produto:', error.message);
+    }
+  };
+
+  // ❌ Remoção
   const deletarProduto = async (id) => {
     try {
-      await fetch(`http://localhost:3001/produtos/${id}`, {
-        method: 'DELETE',
-      });
-  
+      await axios.delete(`http://localhost:3000/produtos/${id}`);
       setProdutos((prev) => prev.filter((produto) => produto.id !== id));
     } catch (err) {
       console.error('Erro ao deletar produto:', err);
     }
   };
 
-  const fetchCategorias = async () => {
-    try {
-      const response = await axios.get("http://localhost:3000/categorias");
-      setCategorias(response.data);
-    } catch (error) {
-      console.error('❌ Erro ao buscar categorias:', error.message);
-    }
+  // 🛒 Carrinho
+  const adicionarAoCarrinho = (produto) => {
+    setCarrinho((prev) => [...prev, produto]);
   };
 
-  const adicionarCategoria = async (novaCategoria) => {
-    try {
-      const response = await axios.post(
-        "http://localhost:3000/categorias",
-        novaCategoria
-      );
-      setCategorias((prevCategorias) => [...prevCategorias, response.data]);
-    } catch (error) {
-      console.error('❌ Erro ao adicionar categoria:', error.message);
-    }
+  const removerDoCarrinho = (id) => {
+    setCarrinho((prev) => prev.filter((item) => item.id !== id));
   };
 
-  const fetchVendas = async () => {
-    try {
-      const response = await axios.get('http://localhost:3000/vendas');
-      setVendas(response.data);
-    } catch (error) {
-      console.error('❌ Erro ao buscar vendas:', error.message);
-    }
-  };
-
-  const adicionarVenda = async (novaVenda) => {
-    try {
-      const response = await axios.post(
-        'http://localhost:3000/vendas',
-         novaVenda
-        );
-      setVendas((prevVendas) => [...prevVendas, response.data]);
-    } catch (error) {
-      console.error('❌ Erro ao adicionar venda:', error.message);
-    }
-  };
-
-  const fetchItensVenda = async () => {
-    try {
-      const response = await axios.get('http://localhost:3000/itens_venda');
-      setItensVenda(response.data);
-    } catch (error) {
-      console.error('❌ Erro ao buscar itens da venda:', error.message);
-    }
-  };
-
-  const adicionarItemVenda = async (novoItemVenda) => {
-    try {
-      const response = await axios.post(
-        'http://localhost:3000/itensvenda',
-         novoItemVenda
-        );
-      setItensVenda((prevItensVenda) => [...prevItensVenda, response.data]);
-    } catch (error) {
-      console.error('❌ Erro ao adicionar item da venda:', error.message);
-    }
-  };
-
-  const fetchEnderecos = async () => {
-    try {
-      const response = await axios.get('http://localhost:3000/enderecos');
-      setEnderecos(response.data);
-    } catch (error) {
-      console.error('❌ Erro ao buscar endereços:', error.message);
-    }
-  };
-
-  const adicionarEndereco = async (novoEndereco) => {
-    try {
-      const response = await axios.post(
-        'http://localhost:3000/enderecos', 
-        novoEndereco
-      );
-      setEnderecos((prevEnderecos) => [...prevEnderecos, response.data]);
-    } catch (error) {
-      console.error('❌ Erro ao adicionar endereço:', error.message);
-    }
-  };
-
+  // 🚀 Carregamento inicial
   useEffect(() => {
     const carregarDados = async () => {
-      await Promise.all([
-        fetchUsuarios(),
-        fetchProdutos(),
-        fetchCategorias(),
-        fetchVendas(),
-        fetchItensVenda(),
-        fetchEnderecos()
-      ])
-      setLoading(false)
-    }
-
-    carregarDados()
-  }, [])
+      await Promise.all([fetchUsuarios(), fetchProdutos()]);
+      setLoading(false);
+    };
+    carregarDados();
+  }, []);
 
   return (
     <GlobalContext.Provider
       value={{
         usuarios,
-        adicionarUsuario,
-        usuarioLogado,
-        setUsuarioLogado,
-        deletarUsuario,
-        produtos,
-        adicionarProduto,
-        deletarProduto,
-        categorias,
-        adicionarCategoria,
-        vendas,
-        adicionarVenda,
-        itensVenda,
-        adicionarItemVenda,
-        enderecos,
-        adicionarEndereco,
-        loading,
         fetchUsuarios,
+        adicionarUsuario,
+
+        produtos,
         fetchProdutos,
-        fetchCategorias,
-        fetchVendas,
-        fetchItensVenda,
-        fetchEnderecos
+        adicionarProduto,
+        editarProduto,
+        deletarProduto,
+
+        categorias,
+        vendas,
+        itensVenda,
+        enderecos,
+
+        carrinho,
+        adicionarAoCarrinho,
+        removerDoCarrinho,
+
+        loading,
       }}
     >
       {children}
     </GlobalContext.Provider>
-  )
-}
+  );
+};
+
+export { GlobalContextProvider, GlobalContext };
+
