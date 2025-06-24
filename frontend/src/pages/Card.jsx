@@ -14,19 +14,7 @@ const Card = ({ id, img, nome, preco, estoque, descricao, categoria }) => {
   };
 
   const abrirDescricao = () => {
-    navigate(`/produto/${id}`, {
-      state: {
-        produto: {
-          id,
-          nome,
-          preco,
-          descricao,
-          estoque,
-          imagem: img,
-          categoria
-        }
-      }
-    });
+    navigate(`/descricaoproduto/${id}`);
   };
 
   return (

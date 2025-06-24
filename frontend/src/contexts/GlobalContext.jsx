@@ -1,4 +1,3 @@
-// src/contexts/GlobalContext.jsx
 import { createContext, useEffect, useState } from 'react';
 import axios from 'axios';
 
@@ -14,7 +13,7 @@ const GlobalContextProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [carrinho, setCarrinho] = useState([]);
 
-  // 🔁 Fetch de dados
+  // Fetch
   const fetchUsuarios = async () => {
     try {
       const response = await axios.get('http://localhost:3000/usuarios');
@@ -27,21 +26,39 @@ const GlobalContextProvider = ({ children }) => {
   const fetchProdutos = async () => {
     try {
       const response = await axios.get('http://localhost:3000/produtos');
+      console.log("response =====>>>>>> ", response)
       setProdutos(response.data);
     } catch (error) {
       console.error('❌ Erro ao buscar produtos:', error.message);
     }
   };
 
-  // ➕ Adição
+  // Adicionar usuário com retorno booleano para sucesso/falha
   const adicionarUsuario = async (novoUsuario) => {
+    // Verifica duplicidade localmente (melhora experiência)
+    const existe = usuarios.some(
+      (u) =>
+        u.email.trim().toLowerCase() === novoUsuario.email.trim().toLowerCase() ||
+        u.nome.trim().toLowerCase() === novoUsuario.nome.trim().toLowerCase()
+    );
+
+    if (existe) {
+      alert('Usuário com esse nome ou email já existe!');
+      return false; // falha
+    }
+
     try {
       const response = await axios.post('http://localhost:3000/usuarios', novoUsuario);
       setUsuarios((prev) => [...prev, response.data]);
+      return true; // sucesso
     } catch (error) {
       console.error('❌ Erro ao adicionar usuário:', error.message);
+      alert('Erro ao cadastrar usuário, tente novamente.');
+      return false;
     }
   };
+
+  // Demais funções (adicionarProduto, editarProduto, deletarProduto, carrinho...) continuam iguais
 
   const adicionarProduto = async (novoProduto) => {
     try {
@@ -52,7 +69,6 @@ const GlobalContextProvider = ({ children }) => {
     }
   };
 
-  // ✏️ Edição
   const editarProduto = async (id, dadosAtualizados) => {
     try {
       const response = await axios.put(`http://localhost:3000/produtos/${id}`, dadosAtualizados);
@@ -64,7 +80,6 @@ const GlobalContextProvider = ({ children }) => {
     }
   };
 
-  // ❌ Remoção
   const deletarProduto = async (id) => {
     try {
       await axios.delete(`http://localhost:3000/produtos/${id}`);
@@ -74,7 +89,6 @@ const GlobalContextProvider = ({ children }) => {
     }
   };
 
-  // 🛒 Carrinho
   const adicionarAoCarrinho = (produto) => {
     setCarrinho((prev) => [...prev, produto]);
   };
@@ -83,7 +97,7 @@ const GlobalContextProvider = ({ children }) => {
     setCarrinho((prev) => prev.filter((item) => item.id !== id));
   };
 
-  // 🚀 Carregamento inicial
+  // Carregamento inicial
   useEffect(() => {
     const carregarDados = async () => {
       await Promise.all([fetchUsuarios(), fetchProdutos()]);
@@ -123,4 +137,3 @@ const GlobalContextProvider = ({ children }) => {
 };
 
 export { GlobalContextProvider, GlobalContext };
-

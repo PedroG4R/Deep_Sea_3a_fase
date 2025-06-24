@@ -4,11 +4,12 @@ import Navbar from '../components/Navbar';
 import Card from './Card';
 import { GlobalContext } from '../contexts/GlobalContext';
 
-const Catalogo = () => {
+export function Catalogo() {
+// const Catalogo = () => {
   const { produtos, fetchProdutos, loading } = useContext(GlobalContext);
 
   useEffect(() => {
-    fetchProdutos(); // Garante que os produtos estejam atualizados ao entrar na página
+    fetchProdutos();
   }, []);
 
   return (
@@ -43,3 +44,4 @@ const Catalogo = () => {
 };
 
 export default Catalogo;
+

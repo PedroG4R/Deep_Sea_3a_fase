@@ -1,6 +1,5 @@
-
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Navbar from '../components/Navbar';
 
@@ -8,6 +7,7 @@ function DescricaoProduto() {
   const { id } = useParams();
   const [produto, setProduto] = useState(null);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function buscarProduto() {
@@ -30,6 +30,9 @@ function DescricaoProduto() {
   return (
     <div className="descricao-produto">
       <Navbar />
+      <button onClick={() => navigate('/catalogo')} style={{ marginTop: '10px' }}>
+        Voltar ao Catálogo
+      </button>
       <h2>{produto.nome}</h2>
       <img src={produto.imagem} alt={produto.nome} style={{ width: '200px' }} />
       <p><strong>Preço:</strong> R$ {produto.preco}</p>
@@ -46,8 +49,4 @@ function DescricaoProduto() {
 }
 
 export default DescricaoProduto;
-
-
-
-
 
