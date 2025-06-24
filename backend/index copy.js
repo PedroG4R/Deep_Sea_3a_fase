@@ -48,7 +48,6 @@ async function createTables() {
       nome VARCHAR(100) NOT NULL,
       cpf VARCHAR(11) UNIQUE NOT NULL,
       telefone BIGINT,
-      email VARCHAR(100),
       datanascimento DATE,
       senha VARCHAR(255) NOT NULL,
       adm BOOLEAN NOT NULL DEFAULT false

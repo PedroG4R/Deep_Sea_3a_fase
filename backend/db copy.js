@@ -134,7 +134,7 @@ async function createTables() {
 }
 
 async function insertUsuario(data) {
-  console.log("data data data AQUI NO BACK=======>> ",data)
+  console.log("data data data ===>> ",data)
   const client = await connect();
 
   // const sql = "INSERT INTO usuario (nome, cpf, telefone, nascimento, senha, adm) VALUES ($1, $2, $3, $4, $5, $6)  RETURNING *"
@@ -142,18 +142,13 @@ async function insertUsuario(data) {
 
   // const result = await client.query(sql, values)
 
-  // const { nome, cpf, telefone, datanascimento, senha, adm = false } = data;
-  const { nome, cpf, telefone, email, datanascimento, senha, adm = false } = data;
+  const { nome, cpf, telefone, datanascimento, senha, adm = false } = data;
  const result = await client.query(
-    `INSERT INTO usuarios (nome, cpf, telefone, email, datanascimento, senha, adm)
-      VALUES ($1, $2, $3, $4, $5, $6, $7)
+    `INSERT INTO usuarios (nome, cpf, telefone, datanascimento, senha, adm)
+      VALUES ($1, $2, $3, $4, $5, $6)
       RETURNING *`,
-   [nome, cpf, telefone, email, datanascimento, senha, adm]
+   [nome, cpf, telefone, datanascimento, senha, adm]
    );
-
-   
-
-
   //const client = await 
   // const sql = "INSERT INTO usuarios (nome, cpf, telefone, datanascimento, senha, adm) VALUES ($1, $2, $3, $4, $5, $6)  RETURNING *"
   // const values = [data.nome, data.cpf, data.telefone, data.datanascimento, data.senha, data.adm]
