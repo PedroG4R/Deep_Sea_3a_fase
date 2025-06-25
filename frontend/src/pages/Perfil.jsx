@@ -1,42 +1,36 @@
-import React, { useContext, useEffect } from 'react'
-import './Perfil.css'
-import { GlobalContext } from '../contexts/GlobalContext'
-import { useNavigate } from 'react-router-dom'
-import Navbar from '../components/Navbar'
+import React, { useContext, useEffect } from 'react';
+import './Perfil.css';
+import { GlobalContext } from '../contexts/GlobalContext';
+import { useNavigate } from 'react-router-dom';
+import Navbar from '../components/Navbar';
 
 function Perfil() {
-  const {
-    usuarioLogado,
-    setUsuarioLogado,
-    deletarUsuario, 
-  } = useContext(GlobalContext);
+  const { usuarioLogado, setUsuarioLogado, deletarUsuario } = useContext(GlobalContext);
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    setUsuarioLogado(null)
-    navigate('/login')
-  }
-
-
-
-  useEffect(() =>{
+  // Proteger rota: se não estiver logado, redireciona
+  useEffect(() => {
     if (!usuarioLogado) {
-    navigate('/login');
-  }
-}, [usuarioLogado, navigate]);
+      navigate('/login');
+    }
+  }, [usuarioLogado, navigate]);
 
-if (!usuarioLogado) return null;
+  if (!usuarioLogado) return null;
 
-
-const handleDelete = async () => {
-  const confirm = window.confirm("Tem certeza que deseja deltar sua conta?");
-  if (confirm) {
-    await deletarUsuario(usuarioLogado.id);
+  const handleLogout = () => {
     setUsuarioLogado(null);
-    alert("Conta deletada com sucesso.");
-    navigate('/cadastro');
-  }
-};
+    navigate('/login');
+  };
+
+  const handleDelete = async () => {
+    const confirm = window.confirm("Tem certeza que deseja deletar sua conta?");
+    if (confirm) {
+      await deletarUsuario(usuarioLogado.id);
+      setUsuarioLogado(null);
+      alert("Conta deletada com sucesso.");
+      navigate('/cadastro');
+    }
+  };
 
   return (
     <div className="perfil-container">
@@ -54,18 +48,19 @@ const handleDelete = async () => {
 
           <div className="dados">
             <p><strong>Nome:</strong> {usuarioLogado.nome}</p>
-            <p><strong>Idade:</strong> {usuarioLogado.nascimento}</p>
+            <p><strong>Data de nascimento:</strong> {usuarioLogado.nascimento}</p>
             <p><strong>E-mail:</strong> {usuarioLogado.email}</p>
             <p><strong>Descrição:</strong></p>
             <p className="descricao">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</p>
           </div>
 
           <button className="btn-deletar" onClick={handleDelete}>Deletar conta</button>
+          <button className="btn-logout" onClick={handleLogout}>Sair</button>
         </div>
 
         <div className="perfil-direita">
           <div className="produtos">
-            <p><strong>Produtos vendendo/Últimas compras:</strong></p>
+            <p><strong>Produtos vendendo / Últimas compras:</strong></p>
             <div className="produtos-grid">
               <div className="add-produto">+</div>
               {[...Array(4)].map((_, i) => (
@@ -87,7 +82,8 @@ const handleDelete = async () => {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Perfil
+export default Perfil;
+

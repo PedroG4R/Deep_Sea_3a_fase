@@ -20,7 +20,7 @@ const router = createBrowserRouter([
     {path: "/catalogo", element: <Catalogo />},
     {path: "/dashboardvendedor", element: <DashboardVendedor />},
     {path: "/deletarconta", element: <DeletarConta />},
-    {path: "/descricaoproduto", element: <DescricaoProduto />},
+    {path: "/descricao/:id", element: <DescricaoProduto />},
     {path: "/login", element: <Login />},
     {path: "/pagamento", element: <Pagamento />},
     {path: "/Paineladm", element: <PainelADM />},

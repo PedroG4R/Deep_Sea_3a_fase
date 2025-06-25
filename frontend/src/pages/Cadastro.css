@@ -1,76 +1,19 @@
-body {
-    margin: 0;
-    padding: 0;
-    background-color: #0B63B6;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    overflow-x: hidden;
-}
-
-.cadastro-container {
-    background-color: #0B63B6;
-    height: calc(100vh - 60px);
-    padding: 25px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-}
-
-.title-text {
-    color: white;
-    font-size: 50px;
-    margin-bottom: 20px;
-}
-
-input {
-    width: 300px;
-    padding: 10px;
-    margin: 10px 0;
-    border: none;
-    border-radius: 8px;
-    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-    font-size: 16px;
-}
-
-input:focus {
-    outline: none;
-    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.4);
-}
-
-label {
-    color: white;
-    font-size: 18px;
-    margin-bottom: 5px;
-    display: block;
+.cadastro-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* espaço entre os inputs */
+  max-width: 400px; /* opcional para limitar largura */
+  margin: 0 auto; /* centraliza horizontalmente */
 }
 
 .btn-cadastrar {
-    background-color: #007acc;
-    color: white;
-    font-size: 20px;
-    padding: 15px 30px;
-    border-radius: 25px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border: none;
-    margin-top: 15px;
+  margin-top: 20px; /* espaço acima do botão */
+  padding: 10px;
+  width: 100%; /* botão ocupa toda largura do formulário */
+  cursor: pointer;
 }
 
-.btn-cadastrar:hover {
-    background-color: #005ea8;
-    transform: scale(1.05);
-}
-.btn-login {
-    background-color: transparent;
-    color: white;
-    font-size: 16px;
-    border: none;
-    margin-top: 10px;
-    cursor: pointer;
-    text-decoration: underline;
-    transition: color 0.3s ease;
-}
-
-.btn-login:hover {
-    color: #cce7ff;
+.btn-disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
 }

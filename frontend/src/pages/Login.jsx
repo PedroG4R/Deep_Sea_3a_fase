@@ -2,30 +2,39 @@ import React, { useState, useContext } from 'react';
 import './Login.css';
 import { GlobalContext } from '../contexts/GlobalContext';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import Navbar from '../components/Navbar';
 
 function Login() {
-  const { usuarios, setUsuarioLogado } = useContext(GlobalContext);
-  console.log("useContext(GlobalContext) =====>>>>> ", useContext(GlobalContext));
-  
-  const [nome, setNome] = useState('');
+  const { setUsuarioLogado } = useContext(GlobalContext);
+  const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
-    e.preventDefault(); // evita recarregar a página no submit
+  const handleLogin = async (e) => {
+    e.preventDefault(); // Impede o recarregamento da página
+    console.log('Tentando login com:', email, senha); // Verifica se chegou aqui
 
-    const usuarioEncontrado = usuarios.find(
-      (u) => u.nome.trim() === nome.trim() && u.senha.trim() === senha.trim()
-    );
+    try {
+      const response = await axios.get('http://localhost:3000/usuarios');
+      const usuarios = response.data;
 
-    if (usuarioEncontrado) {
-      setUsuarioLogado(usuarioEncontrado);
-      alert('Login bem sucedido.');
-      navigate('/perfil');
-    } else {
-      alert('Nome ou senha incorretos.');
-      // Não navega para outro lugar se der erro
+      const usuarioEncontrado = usuarios.find(
+        (u) =>
+          u.email?.trim().toLowerCase() === email.trim().toLowerCase() &&
+          u.senha === senha
+      );
+
+      if (usuarioEncontrado) {
+        setUsuarioLogado(usuarioEncontrado);
+        alert('Login bem-sucedido!');
+        navigate('/perfil');
+      } else {
+        alert('Email ou senha incorretos.');
+      }
+    } catch (error) {
+      console.error('Erro ao fazer login:', error);
+      alert('Erro ao conectar com o servidor.');
     }
   };
 
@@ -35,11 +44,11 @@ function Login() {
       <h1>Login</h1>
 
       <form onSubmit={handleLogin}>
-        <label>Nome</label>
+        <label>Email</label>
         <input
           type="text"
-          value={nome}
-          onChange={(e) => setNome(e.target.value)}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           required
         />
 
