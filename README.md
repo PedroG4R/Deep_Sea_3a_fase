@@ -11,8 +11,7 @@ Requisitos funcionais do projeto:
 - Cadastro de produto e gestão de estoque
 - Dashboard do vendedor  
 - Carrinho e check-out
-  
--Perfil
+- Perfil
 
 Requisitos desejáveis:
 
