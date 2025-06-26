@@ -12,6 +12,7 @@ Requisitos funcionais do projeto:
 - Dashboard do vendedor  
 - Carrinho e check-out
 -Perfil
+
 Requisitos desejáveis:
 
 - Situação do pedido
