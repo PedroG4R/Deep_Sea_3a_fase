@@ -52,7 +52,6 @@ function DescricaoProduto() {
       <h2>{produto.nome}</h2>
       <img src={produto.imagem} alt={produto.nome} style={{ width: '200px' }} />
       <p><strong>Preço:</strong> R$ {produto.preco}</p>
-      <p><strong>Categoria:</strong> {produto.categoria || 'Sem categoria'}</p>
       <p><strong>Descrição:</strong> {produto.descricao}</p>
       <p><strong>Estoque disponível:</strong> {produto.estoque}</p>
 

@@ -22,15 +22,11 @@ function Navbar() {
     <nav className="navbar-container">
           <Link className="link" to="/perfil">Perfil</Link>
           <Link className="link" to="/catalogo">Catálogo</Link>
-          <Link className="link" to="/descricaoproduto">Descrição do Produto</Link>
           <Link className="link" to="/cadastro">Cadastro</Link>
-          <Link className="link" to="/carrinho">Carrinho</Link>
           <h1 className="text-title">Deep () Sea</h1>
           <Link className="link" to="/login">Login</Link>
-          <Link className="link" to="/Paineladm">PerfilADM</Link>
           <Link className="link" to="/Produto">Produto</Link>
           <Link className="link" to="/pagamento">Pagamento</Link>
-          <Link className="link" to="/">Homepage</Link>
     </nav>
   );
 }

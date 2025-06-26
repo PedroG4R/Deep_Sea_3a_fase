@@ -40,14 +40,12 @@ function Produto() {
     try {
       await adicionarProduto(produto);
 
-      // Limpar os campos
       setInputNome('');
       setInputDescricao('');
       setInputPreco('');
       setInputEstoque('');
       setInputImagem(null);
 
-      // Redirecionar para catálogo
       navigate('/catalogo');
     } catch (err) {
       console.error('Erro ao cadastrar produto:', err);

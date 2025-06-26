@@ -8,7 +8,6 @@ function Perfil() {
   const { usuarioLogado, setUsuarioLogado, deletarUsuario } = useContext(GlobalContext);
   const navigate = useNavigate();
 
-  // Proteger rota: se não estiver logado, redireciona
   useEffect(() => {
     if (!usuarioLogado) {
       navigate('/login');
@@ -36,8 +35,10 @@ function Perfil() {
     <div className="perfil-container">
       <Navbar />
       <div className="perfil-box">
-        <h1 className="titulo">DEEP () SEA</h1>
-        <h2>Meu Perfil:</h2>
+      <div className="titulo-container">
+       <h1 className="titulo">DEEP () SEA</h1>
+       <h2 className="subtitulo">Meu Perfil:</h2>
+      </div>
 
         <div className="perfil-esquerda">
           <button className="btn-voltar" onClick={() => navigate(-1)}>←</button>
@@ -66,10 +67,10 @@ function Perfil() {
               {[...Array(4)].map((_, i) => (
                 <div key={i} className="produto">★</div>
               ))}
-              <div className="scroll">→</div>
+              <button className="btn-mais" onClick={() => navigate('/catalogo')}>→</button>
             </div>
           </div>
-
+          
           <div className="interesses">
             <p><strong>Com base no seu interesse:</strong></p>
             <div className="interesses-grid">
@@ -77,7 +78,7 @@ function Perfil() {
                 <div key={i} className="interesse">★</div>
               ))}
             </div>
-            <button className="btn-mais">MAIS</button>
+            <button className="btn-mais" onClick={() => navigate('/catalogo')}>MAIS</button>
           </div>
         </div>
       </div>

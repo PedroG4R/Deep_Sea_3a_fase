@@ -12,29 +12,21 @@ function Login() {
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
-    e.preventDefault(); // Impede o recarregamento da página
-    console.log('Tentando login com:', email, senha); // Verifica se chegou aqui
+    e.preventDefault();
+    console.log('Tentando login com:', email, senha);
 
     try {
-      const response = await axios.get('http://localhost:3000/usuarios');
-      const usuarios = response.data;
+      const response = await axios.post('http://localhost:3000/login', {
+        email,
+        senha,
+      });
 
-      const usuarioEncontrado = usuarios.find(
-        (u) =>
-          u.email?.trim().toLowerCase() === email.trim().toLowerCase() &&
-          u.senha === senha
-      );
-
-      if (usuarioEncontrado) {
-        setUsuarioLogado(usuarioEncontrado);
-        alert('Login bem-sucedido!');
-        navigate('/perfil');
-      } else {
-        alert('Email ou senha incorretos.');
-      }
+      setUsuarioLogado(response.data);
+      alert('Login bem-sucedido!');
+      navigate('/perfil');
     } catch (error) {
       console.error('Erro ao fazer login:', error);
-      alert('Erro ao conectar com o servidor.');
+      alert('Email ou senha incorretos.');
     }
   };
 
@@ -71,3 +63,5 @@ function Login() {
 }
 
 export default Login;
+
+
