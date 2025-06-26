@@ -8,8 +8,7 @@ https://github.com/Philiposobjj
 
 Requisitos funcionais do projeto:
 - Cadastro de usuário 
-- Cadastro de produto e gestão de estoque
-- Dashboard do vendedor  
+- Cadastro de produto
 - Carrinho e check-out
 - Perfil
 
