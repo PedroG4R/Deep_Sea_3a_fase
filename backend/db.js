@@ -3,7 +3,7 @@ const { Pool } = require('pg');
 
 const pool = new Pool({
   host: process.env.DB_HOST,
-  port: process.env.DB_PORT,
+  port: Number(process.env.DB_PORT),
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
@@ -43,11 +43,12 @@ async function selectUsuarioById(id) {
 // PRODUTOS
 async function insertProduto(data) {
   const { nome, descricao, preco, imagem, estoque, id_categoria = null } = data;
-  await query(
+  const result = await query(
     `INSERT INTO produtos (nome, descricao, preco, imagem, estoque, id_categoria)
-     VALUES ($1, $2, $3, $4, $5, $6)`,
+     VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
     [nome, descricao, preco, imagem, estoque, id_categoria]
   );
+  return result.rows[0];
 }
 
 async function selectProdutos() {
@@ -57,6 +58,16 @@ async function selectProdutos() {
 
 async function selectProdutoById(id) {
   const result = await query('SELECT * FROM produtos WHERE id = $1', [id]);
+  return result.rows[0];
+}
+
+async function updateProduto(id, data) {
+  const { nome, descricao, preco, imagem, estoque, id_categoria = null } = data;
+  const result = await query(
+    `UPDATE produtos SET nome=$1, descricao=$2, preco=$3, imagem=$4, estoque=$5, id_categoria=$6
+     WHERE id=$7 RETURNING *`,
+    [nome, descricao, preco, imagem, estoque, id_categoria, id]
+  );
   return result.rows[0];
 }
 
@@ -72,5 +83,6 @@ module.exports = {
   insertProduto,
   selectProdutos,
   selectProdutoById,
+  updateProduto,
   deleteProduto
 };
