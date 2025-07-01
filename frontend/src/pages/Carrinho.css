@@ -1,9 +1,70 @@
-.carrinho-container{
-    background-color: #0B63B6;
-    height: calc(100vh - 60px);
-    padding: 25px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-}
+.carrinho-container {
+    padding: 2rem;
+    background-color: #084986;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    color: #fff;
+  }
+  
+  .carrinho-container h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    color: #fff;
+  }
+  
+  .carrinho-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #eef2f5;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .carrinho-table th,
+  .carrinho-table td {
+    padding: 1rem;
+    text-align: center;
+    color: #333;
+  }
+  
+  .carrinho-table thead {
+    background-color: #d9e2ec;
+    font-weight: bold;
+  }
+  
+  .carrinho-table tr:nth-child(even) {
+    background-color: #f3f6f9;
+  }
+  
+  .carrinho-table button {
+    padding: 6px 10px;
+    margin: 0 3px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background-color: #e53935;
+    color: white;
+    transition: background-color 0.2s ease;
+  }
+  
+  .carrinho-table button:hover {
+    background-color: #c62828;
+  }
+  
+  .quantidade-btn {
+    background-color: #1976d2;
+  }
+  
+  .quantidade-btn:hover {
+    background-color: #115293;
+  }
+  
+  .total-geral {
+    text-align: right;
+    margin-top: 1.5rem;
+    font-size: 1.4rem;
+    color: #fff;
+  }
+  

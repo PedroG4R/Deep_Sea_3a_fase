@@ -11,6 +11,7 @@ import PainelADM from "../pages/PainelADM";
 import Perfil from "../pages/Perfil";
 import Produto from "../pages/Produto";
 import DescricaoProduto from "../pages/DescricaoProduto";
+import EditarProduto from "../pages/EditarProduto";
 
 const router = createBrowserRouter([
     {path: "/", element: <Homepage />},
@@ -21,6 +22,8 @@ const router = createBrowserRouter([
     {path: "/dashboardvendedor", element: <DashboardVendedor />},
     {path: "/deletarconta", element: <DeletarConta />},
     {path: "/descricao/:id", element: <DescricaoProduto />},
+    {path: "/carrinho/:id", element: <Carrinho /> },
+    {path: "/editarproduto/:id", element: <EditarProduto /> },
     {path: "/login", element: <Login />},
     {path: "/pagamento", element: <Pagamento />},
     {path: "/Paineladm", element: <PainelADM />},

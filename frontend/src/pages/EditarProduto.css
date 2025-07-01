@@ -1,0 +1,70 @@
+.editar-produto-container {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 20px;
+    background: #f8f8f8;
+    border-radius: 8px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    font-family: Arial, sans-serif;
+  }
+  
+  .editar-produto-container h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #333;
+  }
+  
+  .form-editar-produto {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-editar-produto label {
+    margin-top: 15px;
+    font-weight: 600;
+    color: #555;
+  }
+  
+  .form-editar-produto input[type="text"],
+  .form-editar-produto input[type="number"],
+  .form-editar-produto textarea {
+    margin-top: 5px;
+    padding: 8px 12px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+  }
+  
+  .form-editar-produto textarea {
+    min-height: 80px;
+  }
+  
+  .form-editar-produto input[type="file"] {
+    margin-top: 10px;
+  }
+  
+  .form-editar-produto img {
+    display: block;
+    margin-top: 10px;
+    max-width: 100%;
+    border-radius: 6px;
+    box-shadow: 0 0 6px rgba(0,0,0,0.1);
+  }
+  
+  .form-editar-produto button {
+    margin-top: 25px;
+    padding: 12px;
+    font-size: 1.1rem;
+    background-color: #3a86ff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .form-editar-produto button:hover {
+    background-color: #265fbb;
+  }
+  
