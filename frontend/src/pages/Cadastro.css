@@ -1,34 +1,44 @@
 .cadastro-container {
   background-color: #0B63B6;
   height: calc(100vh - 60px);
-  padding: 25px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-h1 {
+.title-text {
   color: white;
-  font-size: 50px;
+  font-size: 32px;
   margin-bottom: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 30px 40px;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 label {
   color: white;
-  font-size: 18px;
-  margin-bottom: 5px;
-  display: block;
+  font-size: 16px;
+  margin-top: 10px;
+  margin-bottom: 4px;
+  align-self: flex-start;
 }
 
 input {
   width: 300px;
   padding: 10px;
-  margin: 10px 0;
+  margin-bottom: 10px;
   border: none;
   border-radius: 8px;
-  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
   font-size: 16px;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
 input:focus {
@@ -39,13 +49,13 @@ input:focus {
 .btn-cadastrar {
   background-color: #007acc;
   color: white;
-  font-size: 20px;
-  padding: 15px 30px;
+  font-size: 18px;
+  padding: 12px 28px;
   border-radius: 25px;
-  cursor: pointer;
-  transition: all 0.3s ease;
   border: none;
+  cursor: pointer;
   margin-top: 15px;
+  transition: all 0.3s ease;
 }
 
 .btn-cadastrar:hover {
@@ -53,12 +63,17 @@ input:focus {
   transform: scale(1.05);
 }
 
+.btn-cadastrar:disabled {
+  background-color: #7aaecf;
+  cursor: not-allowed;
+}
+
 .btn-login {
   background-color: transparent;
   color: white;
-  font-size: 16px;
+  font-size: 15px;
   border: none;
-  margin-top: 10px;
+  margin-top: 15px;
   cursor: pointer;
   text-decoration: underline;
   transition: color 0.3s ease;

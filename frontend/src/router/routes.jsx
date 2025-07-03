@@ -14,9 +14,9 @@ import DescricaoProduto from "../pages/DescricaoProduto";
 import EditarProduto from "../pages/EditarProduto";
 
 const router = createBrowserRouter([
+    {path: "/cadastro", element: <Cadastro />},
     {path: "/", element: <Homepage />},
     {path: "/login", element: <Login />},
-    {path: "/cadastro", element: <Cadastro />},
     {path: "/carrinho", element: <Carrinho />},
     {path: "/catalogo", element: <Catalogo />},
     {path: "/dashboardvendedor", element: <DashboardVendedor />},
