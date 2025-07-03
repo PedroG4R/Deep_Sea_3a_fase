@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { GlobalContext } from '../contexts/GlobalContext';
-import './Card.css'; // caso você tenha estilos
+import './Card.css'; 
 
 const Card = ({ id, img, nome, preco, estoque, descricao, categoria }) => {
   const { deletarProduto } = useContext(GlobalContext);
@@ -50,7 +50,7 @@ const Card = ({ id, img, nome, preco, estoque, descricao, categoria }) => {
 
 export default Card;
 
-// Estilos inline (caso não use CSS separado)
+
 const cardEstilo = {
   border: '1px solid #ccc',
   borderRadius: '8px',

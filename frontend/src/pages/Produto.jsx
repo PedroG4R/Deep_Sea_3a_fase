@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { GlobalContext } from '../contexts/GlobalContext';
 import Navbar from '../components/Navbar';
+import './Produto.css';
 
 function Produto() {
   const [inputNome, setInputNome] = useState('');
@@ -21,8 +22,12 @@ function Produto() {
     }
   };
 
-  const cadastrarProduto = async () => {
-    if (!inputNome || !inputPreco) return alert('Nome e preço são obrigatórios');
+  const cadastrarProduto = async (e) => {
+    e.preventDefault();
+    if (!inputNome || !inputPreco) {
+      alert('Nome e preço são obrigatórios');
+      return;
+    }
 
     const produto = {
       nome: inputNome,
@@ -36,21 +41,79 @@ function Produto() {
       await adicionarProduto(produto);
       navigate('/catalogo');
     } catch (err) {
-      console.error("Erro ao cadastrar produto:", err);
+      console.error('Erro ao cadastrar produto:', err);
+      alert('Erro ao cadastrar produto.');
     }
   };
 
   return (
-    <div>
+    <div className="produto-container">
       <Navbar />
       <h2>Cadastro de Produto</h2>
-      <input type="text" placeholder="Nome" value={inputNome} onChange={e => setInputNome(e.target.value)} />
-      <input type="number" placeholder="Preço" value={inputPreco} onChange={e => setInputPreco(e.target.value)} />
-      <input type="text" placeholder="Descrição" value={inputDescricao} onChange={e => setInputDescricao(e.target.value)} />
-      <input type="number" placeholder="Estoque" value={inputEstoque} onChange={e => setInputEstoque(e.target.value)} />
-      <input type="file" accept="image/*" onChange={handleImagemChange} />
-      {inputImagem && <img src={inputImagem} alt="Prévia" width={150} />}
-      <button onClick={cadastrarProduto}>Cadastrar</button>
+
+      <form className="produto-form" onSubmit={cadastrarProduto}>
+        <div className="input-group">
+          <label>Nome:</label>
+          <input
+            type="text"
+            placeholder="Nome do produto"
+            value={inputNome}
+            onChange={(e) => setInputNome(e.target.value)}
+            required
+          />
+        </div>
+
+        <div className="input-group">
+          <label>Preço:</label>
+          <input
+            type="number"
+            placeholder="Preço (ex: 99.90)"
+            step="0.01"
+            value={inputPreco}
+            onChange={(e) => setInputPreco(e.target.value)}
+            required
+          />
+        </div>
+
+        <div className="input-group">
+          <label>Descrição:</label>
+          <textarea
+            placeholder="Descrição do produto"
+            value={inputDescricao}
+            onChange={(e) => setInputDescricao(e.target.value)}
+          />
+        </div>
+
+        <div className="input-group">
+          <label>Estoque:</label>
+          <input
+            type="number"
+            placeholder="Quantidade em estoque"
+            value={inputEstoque}
+            onChange={(e) => setInputEstoque(e.target.value)}
+          />
+        </div>
+
+        <div className="input-group">
+          <label>Imagem:</label>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleImagemChange}
+          />
+          {inputImagem && (
+            <img
+              src={inputImagem}
+              alt="Prévia do produto"
+              className="preview-image"
+            />
+          )}
+        </div>
+
+        <button type="submit" className="btn-produto">
+          Cadastrar
+        </button>
+      </form>
     </div>
   );
 }

@@ -9,7 +9,7 @@ export const GlobalContextProvider = ({ children }) => {
   const [produtos, setProdutos] = useState([]);
   const [carrinho, setCarrinho] = useState([]);
 
-  // Buscar usuários
+  
   useEffect(() => {
     async function buscarUsuarios() {
       try {
@@ -22,7 +22,7 @@ export const GlobalContextProvider = ({ children }) => {
     buscarUsuarios();
   }, []);
 
-  // Buscar produtos
+  
   useEffect(() => {
     async function buscarProdutos() {
       try {
@@ -35,7 +35,7 @@ export const GlobalContextProvider = ({ children }) => {
     buscarProdutos();
   }, []);
 
-  // Adicionar usuário
+  
   const adicionarUsuario = async (novoUsuario) => {
     try {
       const res = await axios.post("http://localhost:3000/usuarios", novoUsuario);
@@ -45,7 +45,7 @@ export const GlobalContextProvider = ({ children }) => {
     }
   };
 
-  // Adicionar produto
+  
   const adicionarProduto = async (novoProduto) => {
     try {
       const res = await axios.post("http://localhost:3000/produtos", novoProduto);
@@ -55,7 +55,7 @@ export const GlobalContextProvider = ({ children }) => {
     }
   };
 
-  // Editar produto
+  
   const editarProduto = async (id, produtoAtualizado) => {
     try {
       const res = await axios.put(`http://localhost:3000/produtos/${id}`, produtoAtualizado);
@@ -67,7 +67,7 @@ export const GlobalContextProvider = ({ children }) => {
     }
   };
 
-  // Deletar produto
+  
   const deletarProduto = async (id) => {
     try {
       await axios.delete(`http://localhost:3000/produtos/${id}`);
@@ -77,7 +77,7 @@ export const GlobalContextProvider = ({ children }) => {
     }
   };
 
-  // Adicionar ao carrinho
+  
   const adicionarCarrinho = (produto) => {
     setCarrinho((prev) => {
       const existe = prev.find((item) => item.id === produto.id);

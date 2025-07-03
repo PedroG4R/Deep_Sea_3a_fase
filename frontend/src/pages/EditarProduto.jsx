@@ -49,14 +49,13 @@ function EditarProduto() {
     if (file) {
       const imageUrl = URL.createObjectURL(file);
       setProduto((prev) => ({ ...prev, imagem: imageUrl }));
-      // Opcional: você pode implementar upload real da imagem para o backend aqui
+      
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validação básica
     if (!produto.nome || !produto.preco) {
       alert('Nome e preço são obrigatórios.');
       return;

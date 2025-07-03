@@ -6,7 +6,7 @@ import './Carrinho.css';
 function Carrinho() {
   const { carrinho, setCarrinho } = useContext(GlobalContext);
 
-  // Aumenta quantidade
+  
   const aumentarQuantidade = (id) => {
     setCarrinho((prev) =>
       prev.map(item =>
@@ -15,7 +15,7 @@ function Carrinho() {
     );
   };
 
-  // Diminui quantidade, remove se chegar a 0
+  
   const diminuirQuantidade = (id) => {
     setCarrinho((prev) =>
       prev
@@ -26,12 +26,12 @@ function Carrinho() {
     );
   };
 
-  // Remove item
+  
   const removerItem = (id) => {
     setCarrinho((prev) => prev.filter(item => item.id !== id));
   };
 
-  // Calcula total do carrinho
+ 
   const totalGeral = carrinho.reduce(
     (total, item) => total + item.preco * item.quantidade,
     0
