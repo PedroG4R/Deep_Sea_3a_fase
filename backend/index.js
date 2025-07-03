@@ -1,7 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-const db = require("./db"); // seu módulo db.js para query no Postgres
+const db = require("./db"); 
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -9,12 +9,12 @@ const port = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-// Rota teste
+
 app.get("/", (req, res) => {
   res.json({ message: "API funcionando com sucesso!" });
 });
 
-// USUÁRIOS
+
 app.get("/usuarios", async (req, res) => {
   try {
     const usuarios = await db.selectUsuarios();
@@ -33,7 +33,6 @@ app.post("/usuarios", async (req, res) => {
   }
 });
 
-// LOGIN simples (email e senha)
 app.post("/login", async (req, res) => {
   const { email, senha } = req.body;
   if (!email || !senha) {
@@ -54,7 +53,7 @@ app.post("/login", async (req, res) => {
   }
 });
 
-// PRODUTOS
+
 app.get("/produtos", async (req, res) => {
   try {
     const produtos = await db.selectProdutos();

@@ -19,7 +19,7 @@ async function query(sql, params = []) {
   }
 }
 
-// USUÁRIOS
+
 async function insertUsuario(data) {
   const { nome, cpf, telefone, email, datanascimento, senha, adm = false } = data;
   const result = await query(
@@ -40,7 +40,7 @@ async function selectUsuarioById(id) {
   return result.rows[0];
 }
 
-// PRODUTOS
+
 async function insertProduto(data) {
   const { nome, descricao, preco, imagem, estoque, id_categoria = null } = data;
   const result = await query(
